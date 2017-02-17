@@ -1,0 +1,125 @@
+
+body{
+	background-color: #323441; /* gray */
+	text-align: center;
+	font-family: 'Raleway', sans-serif;
+}
+
+#titlebar{ /*background of the title bar*/
+	position: fixed;
+    top:0;
+    left:0;
+    right:0;
+
+    height:50px;
+
+	background: #6a5b9d;
+}
+
+h1{  /*Cumulyrics title*/
+	width: 80%;
+	padding: 0.25em 0.625em;
+	margin: 0 auto;
+
+	font-size: 36px;
+
+	color: black;
+}
+
+#back{ /*back button*/
+	font-family: 'Raleway', sans-serif;
+	font-size: 24px;
+	text-align: center;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	
+	color: black;
+	background-color: #6a5b9d;
+
+	border: 2px solid black;
+	height: 50px;
+
+	visibility: hidden;
+}
+
+#home{ /*home button*/
+	background-color: #6a5b9d;
+	color: black;
+
+	position: fixed;
+	right:0;
+	top:0;
+
+	font-family: 'Raleway', sans-serif;
+	font-size: 20px;
+	text-align: center;
+	
+	height: 50px;
+	width: 70px;
+	border: 2px solid black;
+	
+}
+
+#vis{
+	visibility: hidden;
+}
+
+#svgID{
+	padding-top: 5%;
+	transition: height 1s;
+}
+
+#colorButtons{
+	font-family: 'Raleway', sans-serif;
+	color: black;
+
+	position: fixed;
+	right: 1%;
+	top: 6%;
+}
+
+#input{ /* text box */
+	font-family: 'Raleway', sans-serif;
+	font-size: 16px;
+	text-align: center;
+
+	border: 5px solid #6a5b9d;
+	border-radius: 8px;
+
+	width: 30%;
+	padding: 5px 0px;
+}
+
+#userInputs{ /* text input and buttons */
+	padding-top: 20%;
+	transition: padding-top 1s;
+}
+
+
+.purpleButton{ /* class selector for the search button and add to cloud button */
+	background-color:  #6a5b9d;
+	color: black;
+
+	font-size: 24px;
+	font-family: 'Raleway', sans-serif;
+	text-align: center;
+
+	border: none;
+	border-radius: 8px;	
+	padding: 15px 10px;
+}
+
+#facebook{
+	background-color: #3b5998;
+	color: black;
+
+	font-size: 24px;
+	font-family: 'Raleway', sans-serif;
+	text-align: center;
+
+	border: none;
+	border-radius: 8px;
+	padding: 15px 10px;
+}
