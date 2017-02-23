@@ -28,7 +28,8 @@ stops = set(stopwords.words("English")) # english stop words
 artists_per_page = 50 # num of artists requested from api per page. Max 1000
 num_pages = 2 # number of pages to go through 
 song_list_delimiter = '$' # seperates song names in database
-
+lyrics_url = "http://localhost:8081/api/find/" # api url for lyrics-api
+ 
 cursor.execute(get_auto_increment, ("Artist",))
 artist_id = int(cursor.fetchone()[0]) # starting artist id (auto increments)
 
@@ -40,11 +41,12 @@ for page in range(num_pages):
     # Parse response
     artists = response.json()["topartists"]["artist"]
     for artist in artists:
-        artist_id = artist["mbid"] # id for lookup
+        mbid = artist["mbid"] # id for lookup
         artist_name = artist["name"]
         artist_image = artist["image"][2]["#text"] # image url
+        print(artist_name)
         # get list of songs for artist
-        song_request_url = "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&mbid=" + artist_id + "&api_key=d01318ecdfb319d6bb8ef0ea5895f7a0&limit=5&format=json"
+        song_request_url = "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&mbid=" + mbid + "&api_key=d01318ecdfb319d6bb8ef0ea5895f7a0&limit=5&format=json"
         song_response = requests.get(song_request_url)
         # parse song response
         songs = song_response.json()["toptracks"]["track"]
@@ -69,13 +71,14 @@ for page in range(num_pages):
                 continue
             # only continue if song doesn't contain a disqualifying word
             try:
-                lyrics = requests.get("http://lyric-api.herokuapp.com/api/find/" + artist_name + "/" + song_name).json()["lyric"]
+                lyrics = requests.get(lyrics_url + artist_name + "/" + song_name).json()["lyric"]
             except:
                 print("404'd in artist: " + artist_name + ", page " + str(page+1))
                 quit()
             lyric_array = re.split("\n| ", lyrics) # split string into tokens by \n and space
-            filtered_lyrics = [word for word in lyric_array if word not in stops] # remove stop words
-            lyrics_map = Counter(filtered_lyrics) # count word occurances in this song
+            filtered_lyrics = [word.lower() for word in lyric_array if word not in stops] # remove stop words
+            more_filtered_lyrics = [re.sub('["(),\.\?]', '', word) for word in filtered_lyrics]
+            lyrics_map = Counter(more_filtered_lyrics) # count word occurances in this song
             for i in lyrics_map: # loop over words to add songs to their tracking
                 current_list = word_song_map.get(i) # current list of songs
                 if word_song_map.get(i) is None:
@@ -86,9 +89,9 @@ for page in range(num_pages):
         del(word_count['']) # delete empty string which is a result of double spaces in lyrics
         del(word_song_map[''])
         cursor.execute(insert_artist, (artist_name, artist_image))
-        for i in word_count:
-            cursor.execute(insert_song, (song_name, artist_id, word_count[i], word_song_map[i]))
-        cursor.commit()
+        for i in word_count.keys():
+            cursor.execute(insert_song, (i, artist_id, word_count[i], word_song_map[i]))
+        cnx.commit()
         artist_id += 1;
 cursor.close()
 cnx.close()
