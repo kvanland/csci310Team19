@@ -25,8 +25,9 @@ cursor = cnx.cursor()
 stops = set(stopwords.words("English")) # english stop words
 
 # Scraping options
-artists_per_page = 50 # num of artists requested from api per page. Max 1000
-num_pages = 2 # number of pages to go through 
+artists_per_page = 500 # num of artists requested from api per page. Max 1000
+start_page = 1 # artist result page to start scraping on
+end_page = 20 # artist result page to end on
 song_list_delimiter = '$' # seperates song names in database
 lyrics_url = "http://localhost:8081/api/find/" # api url for lyrics-api
  
@@ -35,8 +36,8 @@ artist_id = int(cursor.fetchone()[0]) # starting artist id (auto increments)
 
 # base api url
 base_url = "http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=united%20states&limit=" + str(artists_per_page) + "&page=" 
-for page in range(num_pages):
-    url = base_url+str(page+1)+"&api_key=d01318ecdfb319d6bb8ef0ea5895f7a0&format=json"
+for page in range(start_page, end_page):
+    url = base_url+str(page)+"&api_key=d01318ecdfb319d6bb8ef0ea5895f7a0&format=json"
     response = requests.get(url)
     # Parse response
     artists = response.json()["topartists"]["artist"]
@@ -44,7 +45,7 @@ for page in range(num_pages):
         mbid = artist["mbid"] # id for lookup
         artist_name = artist["name"]
         artist_image = artist["image"][2]["#text"] # image url
-        print(artist_name)
+        print(str(artist_id) + " - " + artist_name)
         # get list of songs for artist
         song_request_url = "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&mbid=" + mbid + "&api_key=d01318ecdfb319d6bb8ef0ea5895f7a0&limit=5&format=json"
         song_response = requests.get(song_request_url)
@@ -88,10 +89,10 @@ for page in range(num_pages):
             word_count.update(lyrics_map) # update overall count for artist
         del(word_count['']) # delete empty string which is a result of double spaces in lyrics
         del(word_song_map[''])
-        cursor.execute(insert_artist, (artist_name, artist_image))
-        for i in word_count.keys():
+        cursor.execute(insert_artist, (artist_name, artist_image)) # add artist to artist table
+        for i in word_count.keys(): # add all words to word table
             cursor.execute(insert_song, (i, artist_id, word_count[i], word_song_map[i]))
-        cnx.commit()
         artist_id += 1;
+    cnx.commit() # commit changes after each page
 cursor.close()
 cnx.close()
