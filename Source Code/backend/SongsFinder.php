@@ -3,12 +3,6 @@
 // Class will get songs from database that are by a certain artist and contains a certain word
 class Song
 {
-    //Constants
-    const SERVER_NAME = 'localhost';
-    const USERNAME = 'username';
-    const PASSWORD = "password";
-    const DB_NAME = "myDB";
-
     //properties
     private $conn;
     private $word;
@@ -17,7 +11,7 @@ class Song
     //constructor, make connection to database
     function __construct($artist, $clickedWord)
     {
-        $this->conn = new mysqli(self::SERVER_NAME, self::USERNAME, self::PASSWORD, self::DB_NAME);
+        $this->conn = new mysqli(Constants::SERVER_NAME, Constants::USERNAME, Constants::PASSWORD, Constants::DB_NAME);
         if ($this->conn->connect_error) {
             die("Connection failed: " . $this->conn->connect_error);
         }
