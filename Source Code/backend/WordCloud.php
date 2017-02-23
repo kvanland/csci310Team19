@@ -19,12 +19,13 @@ class WordCloud
     }
 
     public function getWords($artist){
-
+        $id = $this->getArtistID($artist);
+        $findWords = mysqli_prepare("SELECT ");
     }
 
-    private function getArtistID(){
+    private function getArtistID($artist){
         $artistIdStatement = mysqli_prepare("SELECT ArtistID FROM Artist WHERE ArtistName =?");
-        $artistIdStatement->bind_param("s", $this->artistName);
+        $artistIdStatement->bind_param("s", $artist);
         $artistIdStatement->execute();
         $result = $artistIdStatement->get_result();
         $artistIdStatement->close();
