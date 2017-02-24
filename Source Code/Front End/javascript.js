@@ -347,6 +347,9 @@ function colorToggle() {
 		TODO
 		update color on wordcloud
 	*/
+  populateWordCloud();
+  
+        
 }
 function populateWordCloud(){ //void
 	clearWordCloud(); // reset canvas
@@ -1510,12 +1513,22 @@ function populateWordCloud(){ //void
 	//TODO use model data
 
 	var data = getWordCloudData(currentArtistList);
+  if(document.getElementById('BW').checked) { 
+    d3.wordcloud()
+        .size([500, 300])
+        .selector("#wCCanvas")
+        .fill(d3.scale.ordinal().range(["black"]))
+        .words(words)
+        .start();
+  }
+  else {
 	d3.wordcloud()
         .size([500, 300])
         .selector("#wCCanvas")
         .fill(d3.scale.ordinal().range(["#884400", "#448800", "#888800", "#444400"]))
         .words(words)
         .start();
+      }
       d3.select("#wCCanvas").selectAll("text").on("click", function(d, i) { wordClickAction(d3.select(this).text()); });
 }
 
@@ -1561,12 +1574,8 @@ function showAutoComplete(search){ //void
 	//search: JSON object array
 	setVisible("autoList");
   var list = getAutoCompleteList();
-
-  
-  //Auto complete
-
   // for(int i = 0;  i< list.length; i++) {
-  //   // FOR EACH artist object display it
+  //   // FOR EACH artist object use jquery autocomplete widget to display it
   // }
 }
 
