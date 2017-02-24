@@ -185,6 +185,7 @@ function populateLyrics(lyrics, artist, word){ //void
 		TODO
 		use lyrics from model
 		format page
+    highlight specific word
 	*/
 
 	var lyric = " SMAMLKDSGjlag dahafadhfdah gahfd"
@@ -312,6 +313,12 @@ function colorToggle() {
 	*/
 }
 function populateWordCloud(){ //void
+
+  /*
+      TODO: 
+      make it so clicking a word makes it highlighted
+  */
+
 	clearWordCloud(); // reset canvas
 	var words = [
   {text: 'have', size: 102},
@@ -1523,7 +1530,7 @@ function showAutoComplete(search){ //void
 	//search: JSON object array
 	setVisible("autoList");
   var list = getAutoCompleteList();
-  
+
   // for(int i = 0;  i< list.length; i++) {
   //   // FOR EACH artist object display it
   // }
