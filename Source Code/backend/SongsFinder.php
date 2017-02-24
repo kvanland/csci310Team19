@@ -1,48 +1,31 @@
 <?php
 
 // Class will get songs from database that are by a certain artist and contains a certain word
-class Song
+class Song extends DatabaseAccesor
 {
     //properties
-    private $conn;
     private $word;
     private $artistName;
 
     //constructor, make connection to database
     function __construct($artist, $clickedWord)
     {
-        $this->conn = new mysqli(Constants::SERVER_NAME, Constants::USERNAME, Constants::PASSWORD, Constants::DB_NAME);
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
-        }
-        else{
-            $this->word = $clickedWord;
-            $this->artistName = $artist;
-            $this->getArtistID();
-        }
+        parent::__construct();
+        $this->word = $clickedWord;
+        $this->artistName = $artist;
+        $this->getSongs();
     }
 
-
-    // Gets the artist unique id for an artist name from the DB and then calls get songs
-    private function getArtistID(){
-        $artistIdStatement = mysqli_prepare("SELECT ArtistID FROM Artist WHERE ArtistName =?");
-        $artistIdStatement->bind_param("s", $this->artistName);
-        $artistIdStatement->execute();
-        $result = $artistIdStatement->get_result();
-        if ($result->num_rows > 0) {
-            // output data of each row
-            if($row = $result->fetch_assoc()) {
-                $artistID = $row["id"];
-                getSongs($artistID);
-            }
-        }
-        $artistIdStatement->close();
-    }
 
     // Gets the songs using an artistID and a word from the DB
-    private function getSongs($word, $artistID){
-        $songsStatement = mysqli_prepare("SELECT Songs FROM Word WHERE Word = ? AND ArtistID = ?");
-        $songsStatement->bind_param("si", $word, $this->artistName);
+    private function getSongs(){
+        $artistID = $this->getArtistID($this->artistName);
+        if($artistID == null){
+            sendsongs(null);
+            return;
+        }
+        $songsStatement = $this->conn->prepare("SELECT Songs FROM Word WHERE Word = ? AND ArtistID = ?");
+        $songsStatement->bind_param("si", $this->word, $this->artistName);
         $songsStatement->execute();
         $result = $songsStatement->get_result();
         if ($result->num_rows > 0) {
@@ -57,6 +40,9 @@ class Song
                 arsort($songsFrequencyAssociativeArray);
                 sendSongs($songsFrequencyAssociativeArray);
             }
+        }
+        else{
+            sendSongs(null);
         }
         $songsStatement->close();
 

@@ -8,7 +8,7 @@
  */
 class DatabaseAccesor
 {
-    private $conn;
+    protected $conn;
 
     function __construct()
     {
