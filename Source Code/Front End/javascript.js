@@ -1514,10 +1514,18 @@ function userTypes() {
 		TODO 
 		update autolistevery time user types
 	*/
+  var searchString = "";
+  setAutoCompleteList(requestSongList(searchString));
+  showAutoComplete();
+
 }
 function showAutoComplete(search){ //void
 	//search: JSON object array
 	setVisible("autoList");
+  var list = getAutoCompleteList();
+  for(int i = 0;  i< list.length; i++) {
+    // FOR EACH artist object display it
+  }
 }
 
 function hideAutoComplete(){ //void
