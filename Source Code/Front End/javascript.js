@@ -4,7 +4,32 @@
 //PAGE[0] initial, PAGE[1] cloud, PAGE[2] songs, PAGE[3] lyrics
 var PAGE = [true, false, false, false];
 
+$("#searchBar").autocomplete({
+    source: function(request, callback) {
+      var searchParam = request.term;
+      autoQueryList(searchParam, callback)
+    }
+  });
 
+$("#searchBar").data("ui-autocomplete")._renderItem = function(ul, item){
+
+    var $li = $('<li>'),
+      $img = $('<img>');
+
+    $img.attr({
+        src: item.icon,
+          alt: item.value
+      });
+      $img.css("width", "32px");
+      $img.css("height", "32px");
+
+      $li.attr('data-value', item.label);
+      $li.append('<a href="#">');
+      $li.find('a').append($img).append(item.label);    
+
+      return $li.appendTo(ul);
+
+  }
 //Helper functions
 
 
@@ -58,9 +83,21 @@ function getLyrics(){ //String
 function getAutoCompleteList(){ //JSON object array
 	return autoCompleteList;
 }
+function autoQueryList(query, callback) {
+  callback(requestAutoCompleteList(query));
+}
 
 //Data requester 
 function requestAutoCompleteList(search){ //JSON object array
+
+
+  var searchBar = [
+  {
+    value: "drake",
+    icon: "https://lastfm-img2.akamaized.net/i/u/174s/b4310b8ad99f2b5930b36725bb7deb36.png"
+  }
+  ];
+  return searchBar;
 	/*
 		 TODO
 		use AJAX to request autocompleteList raw data
@@ -1527,11 +1564,12 @@ function userTypes() {
 		TODO 
 		update autolistevery time user types
 	*/
-  var searchString = "";
+  var searchString = d3.select("#searchBar").value;
   setAutoCompleteList(requestSongList(searchString));
   showAutoComplete();
 
 }
+
 function showAutoComplete(search){ //void
 	//search: JSON object array
 	setVisible("autoList");
