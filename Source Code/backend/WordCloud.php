@@ -6,36 +6,17 @@
  * Date: 2/22/17
  * Time: 7:44 PM
  */
-class WordCloud
+class WordCloud extends DatabaseAccesor
 {
-    private $conn;
-    //constructor, make connection to database
-    function __construct()
-    {
-        $this->conn = new mysqli(Constants::SERVER_NAME, Constants::USERNAME, Constants::PASSWORD, Constants::DB_NAME);
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
-        }
-    }
+    private $wordCloudData;
 
-    public function getWords($artist){
+    public function createWordCloud($artist){
         $id = $this->getArtistID($artist);
-        $findWords = mysqli_prepare("SELECT ");
+        $findWords = $this->conn->prepare("SELECT TOP 250 * FROM Words WHERE ArtistID = ? 
+                                    ORDER BY Occurences DESC");
+        $findWords->bind_param("s", $id);
+        $findWords->execute();
+        $this->wordCloudData = $findWords->get_result();
     }
 
-    private function getArtistID($artist){
-        $artistIdStatement = mysqli_prepare("SELECT ArtistID FROM Artist WHERE ArtistName =?");
-        $artistIdStatement->bind_param("s", $artist);
-        $artistIdStatement->execute();
-        $result = $artistIdStatement->get_result();
-        $artistIdStatement->close();
-        if ($result->num_rows > 0) {
-            // output data of each row
-            if($row = $result->fetch_assoc()) {
-                $artistID = $row["id"];
-                return $artistID;
-            }
-        }
-
-    }
 }
