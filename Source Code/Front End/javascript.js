@@ -1523,9 +1523,10 @@ function showAutoComplete(search){ //void
 	//search: JSON object array
 	setVisible("autoList");
   var list = getAutoCompleteList();
-  for(int i = 0;  i< list.length; i++) {
-    // FOR EACH artist object display it
-  }
+  
+  // for(int i = 0;  i< list.length; i++) {
+  //   // FOR EACH artist object display it
+  // }
 }
 
 function hideAutoComplete(){ //void

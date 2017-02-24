@@ -116,15 +116,15 @@
         })
         // clickable words
         .style("cursor", function(d, i) {
-          if (d.href) return 'pointer';
+          return 'pointer';
         })
         .on("mouseover", function(d, i) {
-          if (d.href) {
+           {
             d3.select(this).transition().style('font-size', d.size + 3 + 'px');
           }
         })
         .on("mouseout", function(d, i) {
-          if (d.href) {
+         {
             d3.select(this).transition().style('font-size', d.size + 'px');
           }
         })
