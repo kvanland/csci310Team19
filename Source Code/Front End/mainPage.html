@@ -4,6 +4,8 @@
 <head>
 <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+
 
 <title> Cumulyrics </title>
 </head>
@@ -12,236 +14,54 @@
 	<link rel = "stylesheet" href = "styles.css">
 	<div id = "titlebar">
 		<h1> 
-			<button id = "back" onclick = back()> Back </button> 
+			<button id = "back" onclick = backAction()> Back </button> 
 			Cumulyrics
-			<button id = "home" onclick = home()> <i class=material-icons "md-48">home</i> </button> 
+			<button id = "home" onclick = homeAction()> <i class=material-icons "md-48">home</i> </button> 
 		</h1>
 
 	</div>
-	
-	<div id = "vis" width = "80vh">
-		<svg id = "svgID" width = "100vh" height = "1">
-			<g></g>
-			<g transform="translate(480,300)scale(1.057268738746643,1.057268738746643)">
-				<text text-anchor="middle" transform="translate(64,-13)" style="font-size: 100px; font-family: Raleway; fill: rgb(57, 59, 121);">word</text>
-				<text text-anchor="middle" transform="translate(42,-96)" style="font-size: 91px; font-family: Raleway; fill: rgb(82, 84, 163);">words</text>
-				<text text-anchor="middle" transform="translate(-213,123)" style="font-size: 86px; font-family: Raleway; fill: rgb(107, 110, 207);">sprite</text>
-				<text text-anchor="middle" transform="translate(24,48)" style="font-size: 72px; font-family: Raleway; fill: rgb(156, 158, 222);">placed</text>
-				<text text-anchor="middle" transform="translate(212,44)" style="font-size: 64px; font-family: Raleway; fill: rgb(99, 121, 57);">layout</text>
-				<text text-anchor="middle" transform="translate(-215,49)" style="font-size: 64px; font-family: Raleway; fill: rgb(140, 162, 82);">algorithm</text>
-				<text text-anchor="middle" transform="translate(234,95)" style="font-size: 64px; font-family: Raleway; fill: rgb(181, 207, 107);">area</text>
-				<text text-anchor="middle" transform="translate(-51,-162)" style="font-size: 52px; font-family: Raleway; fill: rgb(206, 219, 156);">without</text>
-				<text text-anchor="middle" transform="translate(-220,-138)" style="font-size: 52px; font-family: Raleway; fill: rgb(140, 109, 49);">step</text>
-				<text text-anchor="middle" transform="translate(-223,-6)" style="font-size: 52px; font-family: Raleway; fill: rgb(189, 158, 57);">bounding</text>
-				<text text-anchor="middle" transform="translate(-24,150)" style="font-size: 52px; font-family: Raleway; fill: rgb(231, 186, 82);">retrieve</text>
-				<text text-anchor="middle" transform="translate(-163,188)" style="font-size: 52px; font-family: Raleway; fill: rgb(231, 203, 148);">operation</text>
-				<text text-anchor="middle" transform="translate(130,-173)" style="font-size: 52px; font-family: Raleway; fill: rgb(132, 60, 57);">collision</text>
-				<text text-anchor="middle" transform="translate(-156,-53)" style="font-size: 52px; font-family: Raleway; fill: rgb(173, 73, 74);">candidate</text>
-				<text text-anchor="middle" transform="translate(313,126)" style="font-size: 37px; font-family: Raleway; fill: rgb(214, 97, 107);">32</text>
-				<text text-anchor="middle" transform="translate(201,135)" style="font-size: 37px; font-family: Raleway; fill: rgb(231, 150, 156);">placement</text>
-				<text text-anchor="middle" transform="translate(197,-94)" style="font-size: 37px; font-family: Raleway; fill: rgb(123, 65, 115);">time</text>
-				<text text-anchor="middle" transform="translate(-337,164)" style="font-size: 37px; font-family: Raleway; fill: rgb(165, 81, 148);">possible</text>
-				<text text-anchor="middle" transform="translate(206,-25)" style="font-size: 37px; font-family: Raleway; fill: rgb(206, 109, 189);">even</text>
-				<text text-anchor="middle" transform="translate(-311,-91)" style="font-size: 37px; font-family: Raleway; fill: rgb(222, 158, 214);">simple</text>
-				<text text-anchor="middle" transform="translate(46,83)" style="font-size: 37px; font-family: Raleway; fill: rgb(57, 59, 121);">starting</text>
-				<text text-anchor="middle" transform="translate(-174,-98)" style="font-size: 37px; font-family: Raleway; fill: rgb(82, 84, 163);">previously</text>
-				<text text-anchor="middle" transform="translate(-62,102)" style="font-size: 37px; font-family: Raleway; fill: rgb(107, 110, 207);">move</text>
-				<text text-anchor="middle" transform="translate(63,183)" style="font-size: 37px; font-family: Raleway; fill: rgb(156, 158, 222);">perform</text>
-				<text text-anchor="middle" transform="translate(-281,-179)" style="font-size: 37px; font-family: Raleway; fill: rgb(99, 121, 57);">hierarchical</text>
-				<text text-anchor="middle" transform="translate(56,216)" style="font-size: 37px; font-family: Raleway; fill: rgb(140, 162, 82);">draw</text>
-				<text text-anchor="middle" transform="translate(200,-131)" style="font-size: 37px; font-family: Raleway; fill: rgb(181, 207, 107);">pixel</text>
-				<text text-anchor="middle" transform="translate(202,-59)" style="font-size: 37px; font-family: Raleway; fill: rgb(206, 219, 156);">data</text>
-				<text text-anchor="middle" transform="translate(-98,-207)" style="font-size: 37px; font-family: Raleway; fill: rgb(140, 109, 49);">separately</text>
-				<text text-anchor="middle" transform="translate(-69,218)" style="font-size: 37px; font-family: Raleway; fill: rgb(189, 158, 57);">expensive</text>
-				<text text-anchor="middle" transform="translate(302,170)" style="font-size: 37px; font-family: Raleway; fill: rgb(231, 186, 82);">pixels</text>
-				<text text-anchor="middle" transform="translate(-322,-53)" style="font-size: 37px; font-family: Raleway; fill: rgb(231, 203, 148);">masks</text>
-				<text text-anchor="middle" transform="translate(308,-211)" style="font-size: 37px; font-family: Raleway; fill: rgb(132, 60, 57);">implementation</text>
-				<text text-anchor="middle" transform="translate(-358,198)" style="font-size: 37px; font-family: Raleway; fill: rgb(173, 73, 74);">detection</text>
-				<text text-anchor="middle" transform="translate(295,-20)" style="font-size: 37px; font-family: Raleway; fill: rgb(214, 97, 107);">larger</text>
-				<text text-anchor="middle" transform="translate(39,-214)" style="font-size: 37px; font-family: Raleway; fill: rgb(231, 150, 156);">whole</text>
-				<text text-anchor="middle" transform="translate(323,-81)" style="font-size: 37px; font-family: Raleway; fill: rgb(123, 65, 115);">comparing</text>
-				<text text-anchor="middle" transform="translate(-70,-4)" style="font-size: 37px; font-family: Raleway; fill: rgb(165, 81, 148);">box</text>
-				<text text-anchor="middle" transform="translate(339,18)" style="font-size: 37px; font-family: Raleway; fill: rgb(206, 109, 189);">large</text>
-				<text text-anchor="middle" transform="translate(279,-137)" style="font-size: 37px; font-family: Raleway; fill: rgb(222, 158, 214);">think</text>
-				<text text-anchor="middle" transform="translate(289,-178)" style="font-size: 37px; font-family: Raleway; fill: rgb(57, 59, 121);">version</text>
-				<text text-anchor="middle" transform="translate(358,53)" style="font-size: 37px; font-family: Raleway; fill: rgb(82, 84, 163);">single</text>
-				<text text-anchor="middle" transform="translate(298,-50)" style="font-size: 37px; font-family: Raleway; fill: rgb(107, 110, 207);">tree</text>
-				<text text-anchor="middle" transform="translate(-25,-85)" style="font-size: 10px; font-family: Raleway; fill: rgb(156, 158, 222);">Cloud</text>
-				<text text-anchor="middle" transform="translate(143,60)" style="font-size: 10px; font-family: Raleway; fill: rgb(99, 121, 57);">Generator</text>
-				<text text-anchor="middle" transform="translate(71,-84)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 162, 82);">Works</text>
-				<text text-anchor="middle" transform="translate(218,-14)" style="font-size: 10px; font-family: Raleway; fill: rgb(181, 207, 107);">positioning</text>
-				<text text-anchor="middle" transform="translate(152,99)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 219, 156);">overlap</text>
-				<text text-anchor="middle" transform="translate(-151,-128)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 109, 49);">available</text>
-				<text text-anchor="middle" transform="translate(-280,-125)" style="font-size: 10px; font-family: Raleway; fill: rgb(189, 158, 57);">GitHub</text>
-				<text text-anchor="middle" transform="translate(207,-162)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 186, 82);">open</text>
-				<text text-anchor="middle" transform="translate(-178,134)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 203, 148);">source</text>
-				<text text-anchor="middle" transform="translate(113,106)" style="font-size: 10px; font-family: Raleway; fill: rgb(132, 60, 57);">license</text>
-				<text text-anchor="middle" transform="translate(124,-84)" style="font-size: 10px; font-family: Raleway; fill: rgb(173, 73, 74);">d3cloud</text>
-				<text text-anchor="middle" transform="translate(-116,-132)" style="font-size: 10px; font-family: Raleway; fill: rgb(214, 97, 107);">Note</text>
-				<text text-anchor="middle" transform="translate(158,73)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 150, 156);">code</text>
-				<text text-anchor="middle" transform="translate(-241,60)" style="font-size: 10px; font-family: Raleway; fill: rgb(123, 65, 115);">converting</text>
-				<text text-anchor="middle" transform="translate(-104,-38)" style="font-size: 10px; font-family: Raleway; fill: rgb(165, 81, 148);">text</text>
-				<text text-anchor="middle" transform="translate(-104,62)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 109, 189);">rendering</text>
-				<text text-anchor="middle" transform="translate(180,-12)" style="font-size: 10px; font-family: Raleway; fill: rgb(222, 158, 214);">final</text>
-				<text text-anchor="middle" transform="translate(156,147)" style="font-size: 10px; font-family: Raleway; fill: rgb(57, 59, 121);">output</text>
-				<text text-anchor="middle" transform="translate(57,-160)" style="font-size: 10px; font-family: Raleway; fill: rgb(82, 84, 163);">requires</text>
-				<text text-anchor="middle" transform="translate(-42,68)" style="font-size: 10px; font-family: Raleway; fill: rgb(107, 110, 207);">additional</text>
-				<text text-anchor="middle" transform="translate(-300,-137)" style="font-size: 10px; font-family: Raleway; fill: rgb(156, 158, 222);">development</text>
-				<text text-anchor="middle" transform="translate(131,71)" style="font-size: 10px; font-family: Raleway; fill: rgb(99, 121, 57);">quite</text>
-				<text text-anchor="middle" transform="translate(-55,-35)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 162, 82);">slow</text>
-				<text text-anchor="middle" transform="translate(16,94)" style="font-size: 10px; font-family: Raleway; fill: rgb(181, 207, 107);">hundred</text>
-				<text text-anchor="middle" transform="translate(183,107)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 219, 156);">run</text>
-				<text text-anchor="middle" transform="translate(36,105)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 109, 49);">asynchronously</text>
-				<text text-anchor="middle" transform="translate(23,-83)" style="font-size: 10px; font-family: Raleway; fill: rgb(189, 158, 57);">configurable</text>
-				<text text-anchor="middle" transform="translate(262,106)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 186, 82);">size</text>
-				<text text-anchor="middle" transform="translate(-313,60)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 203, 148);">makes</text>
-				<text text-anchor="middle" transform="translate(-132,137)" style="font-size: 10px; font-family: Raleway; fill: rgb(132, 60, 57);">animate</text>
-				<text text-anchor="middle" transform="translate(84,116)" style="font-size: 10px; font-family: Raleway; fill: rgb(173, 73, 74);">stuttering</text>
-				<text text-anchor="middle" transform="translate(-136,-145)" style="font-size: 10px; font-family: Raleway; fill: rgb(214, 97, 107);">recommended</text>
-				<text text-anchor="middle" transform="translate(-150,-159)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 150, 156);">always</text>
-				<text text-anchor="middle" transform="translate(237,-119)" style="font-size: 10px; font-family: Raleway; fill: rgb(123, 65, 115);">use</text>
-				<text text-anchor="middle" transform="translate(-166,147)" style="font-size: 10px; font-family: Raleway; fill: rgb(165, 81, 148);">animations</text>
-				<text text-anchor="middle" transform="translate(129,83)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 109, 189);">prevents</text>
-				<text text-anchor="middle" transform="translate(-230,136)" style="font-size: 10px; font-family: Raleway; fill: rgb(222, 158, 214);">browsers</text>
-				<text text-anchor="middle" transform="translate(-16,161)" style="font-size: 10px; font-family: Raleway; fill: rgb(57, 59, 121);">event</text>
-				<text text-anchor="middle" transform="translate(-79,-41)" style="font-size: 10px; font-family: Raleway; fill: rgb(82, 84, 163);">loop</text>
-				<text text-anchor="middle" transform="translate(93,128)" style="font-size: 10px; font-family: Raleway; fill: rgb(107, 110, 207);">blocking</text>
-				<text text-anchor="middle" transform="translate(315,67)" style="font-size: 10px; font-family: Raleway; fill: rgb(156, 158, 222);">placing</text>
-				<text text-anchor="middle" transform="translate(-221,148)" style="font-size: 10px; font-family: Raleway; fill: rgb(99, 121, 57);">incredibly</text>
-				<text text-anchor="middle" transform="translate(252,-2)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 162, 82);">important</text>
-				<text text-anchor="middle" transform="translate(63,95)" style="font-size: 10px; font-family: Raleway; fill: rgb(181, 207, 107);">Attempt</text>
-				<text text-anchor="middle" transform="translate(-38,173)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 219, 156);">place</text>
-				<text text-anchor="middle" transform="translate(127,-160)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 109, 49);">point</text>
-				<text text-anchor="middle" transform="translate(205,-3)" style="font-size: 10px; font-family: Raleway; fill: rgb(189, 158, 57);">usually</text>
-				<text text-anchor="middle" transform="translate(-140,62)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 186, 82);">near</text>
-				<text text-anchor="middle" transform="translate(203,148)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 203, 148);">middle</text>
-				<text text-anchor="middle" transform="translate(272,-111)" style="font-size: 10px; font-family: Raleway; fill: rgb(132, 60, 57);">somewhere</text>
-				<text text-anchor="middle" transform="translate(-335,131)" style="font-size: 10px; font-family: Raleway; fill: rgb(173, 73, 74);">central</text>
-				<text text-anchor="middle" transform="translate(-343,118)" style="font-size: 10px; font-family: Raleway; fill: rgb(214, 97, 107);">horizontal</text>
-				<text text-anchor="middle" transform="translate(163,87)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 150, 156);">line</text>
-				<text text-anchor="middle" transform="translate(-294,-149)" style="font-size: 10px; font-family: Raleway; fill: rgb(123, 65, 115);">intersects</text>
-				<text text-anchor="middle" transform="translate(154,-158)" style="font-size: 10px; font-family: Raleway; fill: rgb(165, 81, 148);">one</text>
-				<text text-anchor="middle" transform="translate(345,-68)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 109, 189);">along</text>
-				<text text-anchor="middle" transform="translate(324,81)" style="font-size: 10px; font-family: Raleway; fill: rgb(222, 158, 214);">increasing</text>
-				<text text-anchor="middle" transform="translate(211,106)" style="font-size: 10px; font-family: Raleway; fill: rgb(57, 59, 121);">spiral</text>
-				<text text-anchor="middle" transform="translate(-158,-172)" style="font-size: 10px; font-family: Raleway; fill: rgb(82, 84, 163);">Repeat</text>
-				<text text-anchor="middle" transform="translate(-331,-126)" style="font-size: 10px; font-family: Raleway; fill: rgb(107, 110, 207);">intersections</text>
-				<text text-anchor="middle" transform="translate(1,-201)" style="font-size: 10px; font-family: Raleway; fill: rgb(156, 158, 222);">found</text>
-				<text text-anchor="middle" transform="translate(248,-68)" style="font-size: 10px; font-family: Raleway; fill: rgb(99, 121, 57);">hard</text>
-				<text text-anchor="middle" transform="translate(-95,-133)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 162, 82);">part</text>
-				<text text-anchor="middle" transform="translate(347,94)" style="font-size: 10px; font-family: Raleway; fill: rgb(181, 207, 107);">making</text>
-				<text text-anchor="middle" transform="translate(-238,-212)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 219, 156);">efficiently</text>
-				<text text-anchor="middle" transform="translate(270,-127)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 109, 49);">According</text>
-				<text text-anchor="middle" transform="translate(317,-125)" style="font-size: 10px; font-family: Raleway; fill: rgb(189, 158, 57);">Jonathan</text>
-				<text text-anchor="middle" transform="translate(-237,-127)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 186, 82);">Feinberg</text>
-				<text text-anchor="middle" transform="translate(-92,74)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 203, 148);">Wordle</text>
-				<text text-anchor="middle" transform="translate(-90,-147)" style="font-size: 10px; font-family: Raleway; fill: rgb(132, 60, 57);">uses</text>
-				<text text-anchor="middle" transform="translate(220,161)" style="font-size: 10px; font-family: Raleway; fill: rgb(173, 73, 74);">combination</text>
-				<text text-anchor="middle" transform="translate(326,-112)" style="font-size: 10px; font-family: Raleway; fill: rgb(214, 97, 107);">boxes</text>
-				<text text-anchor="middle" transform="translate(-207,-227)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 150, 156);">quadtrees</text>
-				<text text-anchor="middle" transform="translate(92,140)" style="font-size: 10px; font-family: Raleway; fill: rgb(123, 65, 115);">achieve</text>
-				<text text-anchor="middle" transform="translate(346,-168)" style="font-size: 10px; font-family: Raleway; fill: rgb(165, 81, 148);">reasonable</text>
-				<text text-anchor="middle" transform="translate(-295,-161)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 109, 189);">speeds</text>
-				<text text-anchor="middle" transform="translate(-332,-161)" style="font-size: 10px; font-family: Raleway; fill: rgb(222, 158, 214);">Glyphs</text>
-				<text text-anchor="middle" transform="translate(112,151)" style="font-size: 10px; font-family: Raleway; fill: rgb(57, 59, 121);">JavaScript</text>
-				<text text-anchor="middle" transform="translate(171,-2)" style="font-size: 10px; font-family: Raleway; fill: rgb(82, 84, 163);">isnt</text>
-				<text text-anchor="middle" transform="translate(-43,159)" style="font-size: 10px; font-family: Raleway; fill: rgb(107, 110, 207);">way</text>
-				<text text-anchor="middle" transform="translate(170,160)" style="font-size: 10px; font-family: Raleway; fill: rgb(156, 158, 222);">precise</text>
-				<text text-anchor="middle" transform="translate(116,95)" style="font-size: 10px; font-family: Raleway; fill: rgb(99, 121, 57);">glyph</text>
-				<text text-anchor="middle" transform="translate(338,-156)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 162, 82);">shapes</text>
-				<text text-anchor="middle" transform="translate(84,-1)" style="font-size: 10px; font-family: Raleway; fill: rgb(181, 207, 107);">via</text>
-				<text text-anchor="middle" transform="translate(-331,-148)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 219, 156);">DOM</text>
-				<text text-anchor="middle" transform="translate(104,-219)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 109, 49);">except</text>
-				<text text-anchor="middle" transform="translate(-2,-3)" style="font-size: 10px; font-family: Raleway; fill: rgb(189, 158, 57);">perhaps</text>
-				<text text-anchor="middle" transform="translate(145,-214)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 186, 82);">SVG</text>
-				<text text-anchor="middle" transform="translate(-149,-186)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 203, 148);">fonts</text>
-				<text text-anchor="middle" transform="translate(350,-54)" style="font-size: 10px; font-family: Raleway; fill: rgb(132, 60, 57);">Instead</text>
-				<text text-anchor="middle" transform="translate(236,173)" style="font-size: 10px; font-family: Raleway; fill: rgb(173, 73, 74);">hidden</text>
-				<text text-anchor="middle" transform="translate(337,-146)" style="font-size: 10px; font-family: Raleway; fill: rgb(214, 97, 107);">canvas</text>
-				<text text-anchor="middle" transform="translate(-337,100)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 150, 156);">element</text>
-				<text text-anchor="middle" transform="translate(147,-226)" style="font-size: 10px; font-family: Raleway; fill: rgb(123, 65, 115);">Retrieving</text>
-				<text text-anchor="middle" transform="translate(202,-122)" style="font-size: 10px; font-family: Raleway; fill: rgb(165, 81, 148);">many</text>
-				<text text-anchor="middle" transform="translate(-337,89)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 109, 189);">batch</text>
-				<text text-anchor="middle" transform="translate(-337,75)" style="font-size: 10px; font-family: Raleway; fill: rgb(222, 158, 214);">Sprites</text>
-				<text text-anchor="middle" transform="translate(-327,-81)" style="font-size: 10px; font-family: Raleway; fill: rgb(57, 59, 121);">initial</text>
-				<text text-anchor="middle" transform="translate(-358,62)" style="font-size: 10px; font-family: Raleway; fill: rgb(82, 84, 163);">performed</text>
-				<text text-anchor="middle" transform="translate(338,-135)" style="font-size: 10px; font-family: Raleway; fill: rgb(107, 110, 207);">using</text>
-				<text text-anchor="middle" transform="translate(-326,-210)" style="font-size: 10px; font-family: Raleway; fill: rgb(156, 158, 222);">doesnt</text>
-				<text text-anchor="middle" transform="translate(249,-57)" style="font-size: 10px; font-family: Raleway; fill: rgb(99, 121, 57);">copy</text>
-				<text text-anchor="middle" transform="translate(-29,184)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 162, 82);">appropriate</text>
-				<text text-anchor="middle" transform="translate(-251,-223)" style="font-size: 10px; font-family: Raleway; fill: rgb(181, 207, 107);">position</text>
-				<text text-anchor="middle" transform="translate(-181,200)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 219, 156);">representing</text>
-				<text text-anchor="middle" transform="translate(194,174)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 109, 49);">advantage</text>
-				<text text-anchor="middle" transform="translate(307,137)" style="font-size: 10px; font-family: Raleway; fill: rgb(189, 158, 57);">involves</text>
-				<text text-anchor="middle" transform="translate(359,-121)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 186, 82);">relevant</text>
-				<text text-anchor="middle" transform="translate(152,171)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 203, 148);">rather</text>
-				<text text-anchor="middle" transform="translate(-146,-238)" style="font-size: 10px; font-family: Raleway; fill: rgb(132, 60, 57);">previous</text>
-				<text text-anchor="middle" transform="translate(-376,87)" style="font-size: 10px; font-family: Raleway; fill: rgb(173, 73, 74);">Somewhat</text>
-				<text text-anchor="middle" transform="translate(-243,205)" style="font-size: 10px; font-family: Raleway; fill: rgb(214, 97, 107);">surprisingly</text>
-				<text text-anchor="middle" transform="translate(285,181)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 150, 156);">lowlevel</text>
-				<text text-anchor="middle" transform="translate(-34,58)" style="font-size: 10px; font-family: Raleway; fill: rgb(123, 65, 115);">hack</text>
-				<text text-anchor="middle" transform="translate(-84,112)" style="font-size: 10px; font-family: Raleway; fill: rgb(165, 81, 148);">made</text>
-				<text text-anchor="middle" transform="translate(175,184)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 109, 189);">tremendous</text>
-				<text text-anchor="middle" transform="translate(353,138)" style="font-size: 10px; font-family: Raleway; fill: rgb(222, 158, 214);">difference</text>
-				<text text-anchor="middle" transform="translate(-361,1)" style="font-size: 10px; font-family: Raleway; fill: rgb(57, 59, 121);">constructing</text>
-				<text text-anchor="middle" transform="translate(363,69)" style="font-size: 10px; font-family: Raleway; fill: rgb(82, 84, 163);">compressed</text>
-				<text text-anchor="middle" transform="translate(102,-232)" style="font-size: 10px; font-family: Raleway; fill: rgb(107, 110, 207);">blocks</text>
-				<text text-anchor="middle" transform="translate(-259,148)" style="font-size: 10px; font-family: Raleway; fill: rgb(156, 158, 222);">1bit</text>
-				<text text-anchor="middle" transform="translate(172,195)" style="font-size: 10px; font-family: Raleway; fill: rgb(99, 121, 57);">32bit</text>
-				<text text-anchor="middle" transform="translate(357,106)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 162, 82);">integers</text>
-				<text text-anchor="middle" transform="translate(-202,210)" style="font-size: 10px; font-family: Raleway; fill: rgb(181, 207, 107);">thus</text>
-				<text text-anchor="middle" transform="translate(135,194)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 219, 156);">reducing</text>
-				<text text-anchor="middle" transform="translate(-281,-209)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 109, 49);">number</text>
-				<text text-anchor="middle" transform="translate(353,120)" style="font-size: 10px; font-family: Raleway; fill: rgb(189, 158, 57);">checks</text>
-				<text text-anchor="middle" transform="translate(-286,-236)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 186, 82);">memory</text>
-				<text text-anchor="middle" transform="translate(-166,214)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 203, 148);">times</text>
-				<text text-anchor="middle" transform="translate(76,154)" style="font-size: 10px; font-family: Raleway; fill: rgb(132, 60, 57);">fact</text>
-				<text text-anchor="middle" transform="translate(237,149)" style="font-size: 10px; font-family: Raleway; fill: rgb(173, 73, 74);">turned</text>
-				<text text-anchor="middle" transform="translate(-201,-213)" style="font-size: 10px; font-family: Raleway; fill: rgb(214, 97, 107);">beat</text>
-				<text text-anchor="middle" transform="translate(364,-26)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 150, 156);">quadtree</text>
-				<text text-anchor="middle" transform="translate(-81,-238)" style="font-size: 10px; font-family: Raleway; fill: rgb(123, 65, 115);">everything</text>
-				<text text-anchor="middle" transform="translate(-172,-196)" style="font-size: 10px; font-family: Raleway; fill: rgb(165, 81, 148);">tried</text>
-				<text text-anchor="middle" transform="translate(-285,-222)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 109, 189);">areas</text>
-				<text text-anchor="middle" transform="translate(352,-15)" style="font-size: 10px; font-family: Raleway; fill: rgb(222, 158, 214);">font</text>
-				<text text-anchor="middle" transform="translate(-341,-11)" style="font-size: 10px; font-family: Raleway; fill: rgb(57, 59, 121);">sizes</text>
-				<text text-anchor="middle" transform="translate(143,-237)" style="font-size: 10px; font-family: Raleway; fill: rgb(82, 84, 163);">primarily</text>
-				<text text-anchor="middle" transform="translate(-248,-235)" style="font-size: 10px; font-family: Raleway; fill: rgb(107, 110, 207);">needs</text>
-				<text text-anchor="middle" transform="translate(-110,0)" style="font-size: 10px; font-family: Raleway; fill: rgb(156, 158, 222);">test</text>
-				<text text-anchor="middle" transform="translate(54,-1)" style="font-size: 10px; font-family: Raleway; fill: rgb(99, 121, 57);">per</text>
-				<text text-anchor="middle" transform="translate(373,81)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 162, 82);">whereas</text>
-				<text text-anchor="middle" transform="translate(371,-42)" style="font-size: 10px; font-family: Raleway; fill: rgb(181, 207, 107);">compare</text>
-				<text text-anchor="middle" transform="translate(-39,-241)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 219, 156);">every</text>
-				<text text-anchor="middle" transform="translate(-188,-239)" style="font-size: 10px; font-family: Raleway; fill: rgb(140, 109, 49);">overlaps</text>
-				<text text-anchor="middle" transform="translate(215,-240)" style="font-size: 10px; font-family: Raleway; fill: rgb(189, 158, 57);">slightly</text>
-				<text text-anchor="middle" transform="translate(329,182)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 186, 82);">Another</text>
-				<text text-anchor="middle" transform="translate(376,-199)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 203, 148);">possibility</text>
-				<text text-anchor="middle" transform="translate(365,-186)" style="font-size: 10px; font-family: Raleway; fill: rgb(132, 60, 57);">merge</text>
-				<text text-anchor="middle" transform="translate(369,-154)" style="font-size: 10px; font-family: Raleway; fill: rgb(173, 73, 74);">fairly</text>
-				<text text-anchor="middle" transform="translate(116,207)" style="font-size: 10px; font-family: Raleway; fill: rgb(214, 97, 107);">though</text>
-				<text text-anchor="middle" transform="translate(378,-143)" style="font-size: 10px; font-family: Raleway; fill: rgb(231, 150, 156);">compared</text>
-				<text text-anchor="middle" transform="translate(228,191)" style="font-size: 10px; font-family: Raleway; fill: rgb(123, 65, 115);">analagous</text>
-				<text text-anchor="middle" transform="translate(-360,50)" style="font-size: 10px; font-family: Raleway; fill: rgb(165, 81, 148);">mask</text>
-				<text text-anchor="middle" transform="translate(262,-244)" style="font-size: 10px; font-family: Raleway; fill: rgb(206, 109, 189);">essentially</text>
-				<text text-anchor="middle" transform="translate(-365,35)" style="font-size: 10px; font-family: Raleway; fill: rgb(222, 158, 214);">ORing</text>
-				<text text-anchor="middle" transform="translate(225,204)" style="font-size: 10px; font-family: Raleway; fill: rgb(57, 59, 121);">block</text>
-				<text text-anchor="middle" transform="translate(-139,5)" style="font-size: 10px; font-family: Raleway; fill: rgb(82, 84, 163);"></text>
-			</g>
+	<br><br><br><br>
+	<div id = "WordCloud" width = "80vh">
+		<svg id = "wCCanvas" width = "100vh" height = "1">
+			
 		</svg>
-		<form id = "colorButtons">
-			<input type = "radio" name = "Color" value = "Black and White"> Black and White </input> 
-			<input type = "radio" name = "Color" value = "Colorful" checked> Colorful </input>
+		<form id = "colorButtons" onchange = colorToggle()>
+			<input type = "radio"  name = "Color" id="BW" value = "Black and White"> Black and White </input> 
+			<input type = "radio" name = "Color" id = "color" value = "Colorful" checked> Colorful </input>
 		</form>
 	</div>
-	
-	<div id = "userInputs">
-		<input id = "input" type = "text"></input>
-		<br></br>
-		<button id = "search" class = "purpleButton" onclick = search()> Search </button>
-		<button id = "facebook"> Share to Facebook</button>
-		<button class = "purpleButton"> Add to Cloud </button>
+
+
+	<div id = "SongList" width = "80vh" height = "0">
+		<svg id = "songListCanvas" width = "100vh" height = "0">
+		</svg>
+
 	</div>
 
+
+	<div id = "Lyrics" width = "80vh">
+		<svg id = "lyricsCanvas" width = "100vh" height = "0">
+		</svg>
+	</div>
+
+
+	
+	<div id = "Search">
+		<input id = "searchBar" type = "text" list="autoList" onchange= userTypes()></input>
+		<br></br>
+		<button id = "searchButton" class = "purpleButton" onclick = searchAction()> Search </button>
+		<button id = "shareButton"> Share to Facebook</button>
+		<button id = "mergeButton" class = "purpleButton"> Add to Cloud </button>
+	</div>
+	<script src="lib/d3/d3.js" charset="utf-8"></script>
+    <script src="lib/d3/d3.layout.cloud.js"></script>
+    <script src="d3.wordcloud.js"></script>
+    <script src="example.words.js"></script>
+    	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 	<script src = "javascript.js"> </script> 
+
+
 <body>
 
 </html>
