@@ -6,6 +6,9 @@
  * Date: 2/22/17
  * Time: 7:44 PM
  */
+include 'DatabaseAccesor.php';
+include 'Constants.php';
+
 class WordCloud extends DatabaseAccesor
 {
     private $wordCloudData;
