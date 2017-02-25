@@ -11,6 +11,27 @@
 </head>
 
 <body>
+
+	<script>
+  		window.fbAsyncInit = function() {
+    	FB.init({
+      	appId      : '1763484507313644',
+      	xfbml      : true,
+      	version    : 'v2.8'
+    	});
+    	FB.AppEvents.logPageView();
+  		};
+
+  		(function(d, s, id){
+     		var js, fjs = d.getElementsByTagName(s)[0];
+     		if (d.getElementById(id)) {return;}
+     		js = d.createElement(s); js.id = id;
+     		js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1763484507313644";
+     		fjs.parentNode.insertBefore(js, fjs);
+   		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+
 	<link rel = "stylesheet" href = "styles.css">
 	<div id = "titlebar">
 		<h1> 
@@ -52,16 +73,27 @@
 		<br></br>
 		<button id = "searchButton" class = "purpleButton" onclick = searchAction()> Search </button>
 		<button id = "shareButton"> Share to Facebook</button>
+		
 		<button id = "mergeButton" class = "purpleButton"> Add to Cloud </button>
 	</div>
+
 	<script src="lib/d3/d3.js" charset="utf-8"></script>
     <script src="lib/d3/d3.layout.cloud.js"></script>
     <script src="d3.wordcloud.js"></script>
     <script src="example.words.js"></script>
-    	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 	<script src = "javascript.js"> </script> 
 
+	<script>
+	document.getElementById('shareButton').onclick = function() {
+  	FB.ui({
+    method: 'share',
+    mobile_iframe: true,
+    href: '',
+  }, function(response){});
+	}
+	</script>
 
 <body>
 
