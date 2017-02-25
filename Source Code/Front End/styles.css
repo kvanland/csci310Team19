@@ -1,6 +1,7 @@
 
 body{
-	background-color: #323441; /* gray */
+	/*background-color: #323441; gray */
+	background-color: #808080;
 	text-align: center;
 	font-family: 'Raleway', sans-serif;
 }
@@ -62,10 +63,10 @@ h1{  /*Cumulyrics title*/
 	
 }
 
-#wordCloud{
-	padding: 5px 0px;
+#WordCloud{
 	visibility: hidden;
 	transition: height 1s;
+	height: auto;
 }
 
 #songListCanvas{
@@ -76,9 +77,10 @@ h1{  /*Cumulyrics title*/
 	transition: height 1s;
 }
 
-#wcCanvas{
-	padding-top: 5%;
+#wCCanvas{
 	transition: height 1s;
+	display: block;
+	margin: 0 auto;
 }
 
 #colorButtons{
