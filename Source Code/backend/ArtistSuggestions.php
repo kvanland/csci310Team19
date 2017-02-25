@@ -7,6 +7,9 @@
  * Time: 4:53 PM
  */
 
+include "DatabaseAccesor.php";
+include  "Constants.php";
+
 // This class gets a list of suggested artist names that start with the inputted string
 class ArtistSuggestions extends DatabaseAccesor
 {
@@ -30,8 +33,11 @@ class ArtistSuggestions extends DatabaseAccesor
             }
             return $suggestions;
         }
+        echo $suggestions;
         return null;
     }
 
-
 }
+
+$suggest = new ArtistSuggestions();
+$suggest->getSuggestion("Kan");
