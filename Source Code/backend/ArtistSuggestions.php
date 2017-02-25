@@ -24,7 +24,7 @@ class ArtistSuggestions extends DatabaseAccesor
             $suggestions = array();
             while($row = $result->fetch_assoc() && $i < 5) {
                 $artistName = $row["ArtistName"];
-                $artistImage = $row["ArtistImage"];
+                $artistImage = $row["ImageURL"];
                 $suggestions[$artistName] = $artistImage;
                 $i++;
             }
