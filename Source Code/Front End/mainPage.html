@@ -15,7 +15,7 @@
 	<script>
   		window.fbAsyncInit = function() {
     	FB.init({
-      	appId      : '1763484507313644',
+      	appId      : '1763996273929134',
       	xfbml      : true,
       	version    : 'v2.8'
     	});
@@ -26,9 +26,19 @@
      		var js, fjs = d.getElementsByTagName(s)[0];
      		if (d.getElementById(id)) {return;}
      		js = d.createElement(s); js.id = id;
-     		js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1763484507313644";
+     		js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1763996273929134";
      		fjs.parentNode.insertBefore(js, fjs);
    		}(document, 'script', 'facebook-jssdk'));
+
+   		function login(){
+   			FB.login(function(response){
+   				if(response.authResponse){
+   					FB.api("/me", function(response){
+   						document.getElementById("searchButton").innerHTML = response.name;
+   					})
+   				}
+   			});
+   		}
 	</script>
 
 
@@ -87,11 +97,12 @@
 
 	<script>
 	document.getElementById('shareButton').onclick = function() {
-  	FB.ui({
-    method: 'share',
-    mobile_iframe: true,
-    href: '',
-  }, function(response){});
+		FB.ui({
+	    method: 'feed',
+	    caption: 'Test for development',
+	    link: 'http://localhost/mainPage.html',
+	  	}, 
+	  	function(response){});
 	}
 	</script>
 
