@@ -7,7 +7,6 @@
  * Time: 7:44 PM
  */
 include 'DatabaseAccesor.php';
-include 'Constants.php';
 
 class WordCloud extends DatabaseAccesor
 {
@@ -16,11 +15,12 @@ class WordCloud extends DatabaseAccesor
     //creates data for word cloud
     public function createWordCloud($artist){
         $id = $this->getArtistID($artist);
-        $findWords = $this->conn->prepare("SELECT TOP 250 Word,Occurrences,Songs FROM Words WHERE ArtistID = ? 
-                                    ORDER BY Occurences DESC");
+        $findWords = $this->conn->prepare("SELECT Word,Occurences,Songs FROM CUMULYRICS.Word WHERE ArtistID = ? 
+                                    ORDER BY Occurences DESC LIMIT 0,250");
         $findWords->bind_param("s", $id);
         $findWords->execute();
-        $this->wordCloudData = mysqli_fetch_row($findWords->get_result());
+        $this->wordCloudData = $findWords->get_result();
+
     }
 
     //get words
@@ -28,7 +28,7 @@ class WordCloud extends DatabaseAccesor
         if (!isset($this->wordCloudData)){
             return null;
         }
-        return $this->wordCloudData[0];
+        return $this->wordCloudData;
     }
 
     public function getOccurrences(){

@@ -15,12 +15,13 @@ if(strlen($artist = 0)){
 $wc = new WordCloud();
 $wc->createWordCloud($artist);
 $words =  $wc->getWords();
-$count = $wc->getOccurrences();
+
 $sendObj = array();
 
-for($i = 0;$i<0;$i++){
-    array_push($sendObj,array("text"=>$words[$i],"size"=> $count[$i]));
+while($row = $words->fetch_assoc()){
+    array_push($sendObj,array("text"=>$row["Word"],"size"=> $row["Occurences"]));
 }
+
 
 echo json_encode($sendObj);
 ?>

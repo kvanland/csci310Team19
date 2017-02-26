@@ -8,6 +8,11 @@
 include 'WordCloud.php';
 $wc = new WordCloud();
 $wc->createWordCloud("Drake");
-echo $wc->getWords();
+$words = $wc->getWords();
+$sendObj = array();
+while($row = $words->fetch_assoc()){
+    array_push($sendObj,array("text"=>$row["Word"],"size"=> $row["Occurences"]));
+}
+echo json_encode($sendObj);
 
 ?>
