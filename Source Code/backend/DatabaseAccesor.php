@@ -6,6 +6,8 @@
  * Date: 2/23/17
  * Time: 4:21 PM
  */
+
+include "Constants.php";
 class DatabaseAccesor
 {
     protected $conn;
@@ -19,14 +21,14 @@ class DatabaseAccesor
     }
 
     protected function getArtistID($artistName){
-        $artistIdStatement = mysqli_prepare("SELECT ArtistID FROM Artist WHERE ArtistName =?");
+        $artistIdStatement = $this->conn->prepare("SELECT ArtistID FROM Artist WHERE ArtistName =?");
         $artistIdStatement->bind_param("s", $artistName);
         $artistIdStatement->execute();
         $result = $artistIdStatement->get_result();
         if ($result->num_rows > 0) {
             // output data of each row
             if($row = $result->fetch_assoc()) {
-                $artistID = $row["id"];
+                $artistID = $row["ArtistID"];
                 return $artistID;
             }
         }
