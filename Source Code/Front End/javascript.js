@@ -45,8 +45,9 @@ function setPage(page){
 	}
 	PAGE[page] = true;
 }
-
-//Word Cloud Model
+/***************************************************************
+                      Word Cloud Model
+***************************************************************/
 var autoCompleteList; //JSON object array
 var wordCloudData; //JSON object array
 var lyrics; //String
@@ -92,7 +93,10 @@ function autoQueryList(query, callback) { //JSON object array
   callback(requestAutoCompleteList(query));
 }
 
-//Data requester 
+/***************************************************************
+                     Data Requester
+***************************************************************/
+
 function requestAutoCompleteList(search){ //JSON object array
 
 
@@ -145,7 +149,9 @@ function requestSongList(word, artistList){ //JSON object array
 	*/
 }
 
-//Word Cloud View Model 
+/***************************************************************
+                      Word Cloud View Model
+***************************************************************/
 var currentWord; //String
 var currentSong; //JSON object
 var currentArtistList; //JSON object array
@@ -218,7 +224,11 @@ function hideSongListPage(){ //void
 	setHeight("songListCanvas", "0");
 }
 
-//Lyrics
+/***************************************************************
+                      Lyrics
+***************************************************************/
+var lyricsCanvas = document.getElementById("lyricsCanvas");
+
 function populateLyrics(lyrics, artist, word){ //void
 
 	/*
@@ -237,7 +247,11 @@ function clearLyrics(){ //void
 	lyrics = '';
 }
 
-//SongList
+/***************************************************************
+                      Song List
+***************************************************************/
+var songListCanvas = document.getElementById("songListCanvas");
+
 function populateSongList(songData){ //void
 	clearSongList();
 	var nameArray = new Array();
@@ -301,7 +315,10 @@ function songClickAction(name, artist){ //void
 	setPage(3);
 }
 
-//HTML
+/***************************************************************
+                      HTML
+***************************************************************/
+
 function homeAction(){
 	if(PAGE[0]) {
 		// if user is already all the way home do nothing
@@ -344,7 +361,11 @@ function backAction(){
 	}
 }
 
-//WordCloud
+/***************************************************************
+                      WordCloud
+***************************************************************/
+var wCCanvas = document.getElementById("wCCanvas");
+
 function colorToggle() {
 	/*
 		TODO
@@ -1516,7 +1537,7 @@ function populateWordCloud(){ //void
 	//TODO use model data
 
 	var data = getWordCloudData(currentArtistList);
-  var width = document.getElementById("wCCanvas").clientWidth;
+  var width = wCCanvas.clientWidth;
   if(document.getElementById('blackAndWhite').checked) { 
     d3.wordcloud()
         .size([width, 500])
@@ -1536,7 +1557,6 @@ function populateWordCloud(){ //void
   }
 
   d3.select("#wCCanvas").selectAll("text").on("click", function(d, i) { wordClickAction(d3.select(this).text()); });
-  /*d3.select("#wCCanvas").selectAll("text").style("font-family", "Raleway");*/
 }
 
 
@@ -1565,7 +1585,16 @@ function wordClickAction(word){ //void
 	showSongListPage();
 }
 
-//Search
+/***************************************************************
+                      Search
+***************************************************************/
+var searchButton = document.getElementById("searchButton");
+var searchBar = document.getElementById("searchBar");
+var shareButton = document.getElementById("shareButton");
+var mergeButton = document.getElementById("mergeButton");
+var searchContainer = document.getElementById("Search");
+ 
+
 function userTypes() {
 	/*
 		TODO 
@@ -1621,16 +1650,19 @@ function showSearch(){ //void
 	setVisible("Search");
 }
 
-//Animation Functions
+/***************************************************************
+                      Animation Functions
+***************************************************************/
+
 function shiftInputsDown(){ //void
-	document.getElementById("Search").style.paddingTop = "0%";
+	searchContainer.style.paddingTop = "0%";
 }
 
 function shiftInputsCenter(){ //void
 	setHeight("wCCanvas", "1");
 	setHeight("songListCanvas", "1");
 	setHeight("lyricsCanvas", "1");
-	document.getElementById("Search").style.paddingTop = "10%";
+	searchContainer.style.paddingTop = "10%";
 }
 
 function setHeight(id, height){ //void
