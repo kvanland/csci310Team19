@@ -102,34 +102,12 @@
 
 
   <script>
-
-
   document.getElementById('shareButton').onclick = function() {
     FB.ui({
     method: 'share',
-    href: 'https://developers.facebook.com/docs/',
+    href: 'https://www.photographyblogger.net/wp-content/uploads/2010/05/flower29.jpg',
+    caption: 'test photo upload',
     }, function(response){});
-  }
-  
-  document.getElementById('mergeButton').onclick = function postImage1() {
-     FB.login(function(response) {
-      if(response.status === 'connected'){
-        //alert("Facebook: Successfully logged in");
-      }
-    }, {scope: 'publish_actions'});
-
-    FB.api(
-    '/me/photos',
-    'POST',
-    {"url":"https://www.photographyblogger.net/wp-content/uploads/2010/05/flower29.jpg","caption":"test photo upload"},
-    function(response) {
-        alert(response.error.message);
-        if (!response || response.error) {
-          alert('Failure! ' + response.status + ' You may logout once and try again');
-        } else {
-          alert('Success! Post ID: ' + response);
-        }
-    }, {scope: 'publish_actions'});
   }
   </script>
 
