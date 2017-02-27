@@ -25,8 +25,6 @@
     };
     firebase.initializeApp(config);
 
-    // Get a reference to the storage service, which is used to create references in your storage bucket
-    var storage = firebase.storage();
   </script>
 
   <script>
@@ -50,7 +48,7 @@
 
   </script>
 
-  <link rel = "stylesheet" href = "styles.css">
+  <link rel = "stylesheet" href = "frontEnd/styles.css">
   <div id = "titlebar">
     <h1> 
       <button id = "back" onclick = backAction()> Back </button> 
@@ -94,19 +92,48 @@
     <button id = "mergeButton" class = "purpleButton"> Add to Cloud </button>
   </div>
 
-  <script src= "lib/d3/d3.js" charset="utf-8"></script>
-  <script src= "lib/d3/d3.layout.cloud.js"></script>
-  <script src= "d3.wordcloud.js"></script>
-  <script src= "example.words.js"></script>
+  <script src= "frontEnd/lib/d3/d3.js" charset="utf-8"></script>
+  <script src= "frontEnd/lib/d3/d3.layout.cloud.js"></script>
+  <script src= "frontEnd/d3.wordcloud.js"></script>
+  <script src= "frontEnd/example.words.js"></script>
   <script src= "https://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src= "https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
-  <script src= "javascript.js"> </script> 
+  <script src= "frontEnd/javascript.js"> </script> 
 
 
 
   <script>
 
+  document.getElementById('shareButton').onclick = function() {
 
+   // Points to the root reference
+   var tempRef = firebase.storage().ref().child('images/upload.jpg');
+
+   var s = new XMLSerializer().serializeToString(document.getElementById("wCCanvas"))
+
+
+var img = window.btoa(s);
+console.log(img);
+
+   // Upload file and metadata to the object 'images/mountains.jpg'
+   var uploadTask = tempRef.putString(img, 'base64');
+
+ uploadTask.on('state_changed', function(snapshot) { },
+   function(error) {
+     // Handle unsuccessful uploads
+   }, function() {
+     // Handle successful uploads on complete
+     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+     var downloadURL = uploadTask.snapshot.downloadURL;
+     FB.ui({
+       method: 'share',
+       href: downloadURL,
+       caption: 'test photo upload',
+     }, function(response){});
+   });
+}
+
+/*
   document.getElementById('shareButton').onclick = function() {
     FB.ui({
     method: 'share',
@@ -114,6 +141,7 @@
     caption: 'test photo upload',
     }, function(response){});
   }
+  */
   </script>
 
 <body>

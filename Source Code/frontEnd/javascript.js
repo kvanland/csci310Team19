@@ -377,7 +377,10 @@ function colorToggle() {
 }
 function populateWordCloud(){ //void
 	clearWordCloud(); // reset canvas
-	var words = [
+  
+
+
+	var words1 = [
   {text: 'have', size: 102},
   {text: 'Oliver', size: 47},
   {text: 'say', size: 46},
@@ -1543,7 +1546,7 @@ function populateWordCloud(){ //void
         .size([width, 500])
         .selector("#wCCanvas")
         .fill(d3.scale.ordinal().range(["black", "white"]))
-        .words(words)
+        .words(words1)
         .start();
   }
   else {
@@ -1552,7 +1555,7 @@ function populateWordCloud(){ //void
         .font('Raleway')
         .selector("#wCCanvas")
         .fill(d3.scale.ordinal().range(["#ff7f7f", "#ffb481", "#fffa8b", "#9cff86", "#89d8ff", "#a8e6cf", "#ECCDFA"]))
-        .words(words)
+        .words(words1)
         .start();
   }
 
