@@ -11,7 +11,6 @@ include "SongsFinder.php";
 $word = $_GET["word"];
 $artistName = $_GET["artist"];
 
-
 if(strlen($word) == 0|| strlen($artistName) == 0){
     echo null;
     exit(1);
