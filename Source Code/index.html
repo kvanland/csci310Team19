@@ -24,6 +24,7 @@
       messagingSenderId: "163759277958"
     };
     firebase.initializeApp(config);
+
   </script>
 
   <script>
@@ -47,7 +48,7 @@
 
   </script>
 
-  <link rel = "stylesheet" href = "styles.css">
+  <link rel = "stylesheet" href = "frontEnd/styles.css">
   <div id = "titlebar">
     <h1> 
       <button id = "back" onclick = backAction()> Back </button> 
@@ -91,46 +92,56 @@
     <button id = "mergeButton" class = "purpleButton"> Add to Cloud </button>
   </div>
 
-  <script src= "lib/d3/d3.js" charset="utf-8"></script>
-  <script src= "lib/d3/d3.layout.cloud.js"></script>
-  <script src= "d3.wordcloud.js"></script>
-  <script src= "example.words.js"></script>
+  <script src= "frontEnd/lib/d3/d3.js" charset="utf-8"></script>
+  <script src= "frontEnd/lib/d3/d3.layout.cloud.js"></script>
+  <script src= "frontEnd/d3.wordcloud.js"></script>
+  <script src= "frontEnd/example.words.js"></script>
   <script src= "https://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src= "https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
-  <script src= "javascript.js"> </script> 
+  <script src= "frontEnd/javascript.js"> </script> 
 
 
 
   <script>
 
+  document.getElementById('shareButton').onclick = function() {
 
+   // Points to the root reference
+   var tempRef = firebase.storage().ref().child('images/upload.jpg');
+
+   var s = new XMLSerializer().serializeToString(document.getElementById("wCCanvas"))
+
+
+var img = window.btoa(s);
+console.log(img);
+
+   // Upload file and metadata to the object 'images/mountains.jpg'
+   var uploadTask = tempRef.putString(img, 'base64');
+
+ uploadTask.on('state_changed', function(snapshot) { },
+   function(error) {
+     // Handle unsuccessful uploads
+   }, function() {
+     // Handle successful uploads on complete
+     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+     var downloadURL = uploadTask.snapshot.downloadURL;
+     FB.ui({
+       method: 'share',
+       href: downloadURL,
+       caption: 'test photo upload',
+     }, function(response){});
+   });
+}
+
+/*
   document.getElementById('shareButton').onclick = function() {
     FB.ui({
     method: 'share',
-    href: 'https://developers.facebook.com/docs/',
+    href: 'https://www.photographyblogger.net/wp-content/uploads/2010/05/flower29.jpg',
+    caption: 'test photo upload',
     }, function(response){});
   }
-  
-  document.getElementById('mergeButton').onclick = function postImage1() {
-     FB.login(function(response) {
-      if(response.status === 'connected'){
-        //alert("Facebook: Successfully logged in");
-      }
-    }, {scope: 'publish_actions'});
-
-    FB.api(
-    '/me/photos',
-    'POST',
-    {"url":"https://www.photographyblogger.net/wp-content/uploads/2010/05/flower29.jpg","caption":"test photo upload"},
-    function(response) {
-        alert(response.error.message);
-        if (!response || response.error) {
-          alert('Failure! ' + response.status + ' You may logout once and try again');
-        } else {
-          alert('Success! Post ID: ' + response);
-        }
-    }, {scope: 'publish_actions'});
-  }
+  */
   </script>
 
 <body>
