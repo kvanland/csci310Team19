@@ -5,6 +5,7 @@
  * Date: 2/23/17
  * Time: 6:17 PM
  */
+include "WordCloud.php";
 $artist = $_GET["artist"];
 
 if(strlen($artist) == 0){
