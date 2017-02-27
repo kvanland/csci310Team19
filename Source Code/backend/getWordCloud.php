@@ -7,14 +7,13 @@
  */
 $artist = $_GET["artist"];
 
-if(strlen($artist = 0)){
+if(strlen($artist) == 0){
     echo null;
     exit(1);
 }
-
 $wc = new WordCloud();
 $wc->createWordCloud($artist);
-$words =  $wc->getWords();
+$words = $wc->getWords();
 
 $sendObj = array();
 
