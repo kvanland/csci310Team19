@@ -10,8 +10,7 @@ include "SongsFinder.php";
 
 $word = $_GET["word"];
 $artistName = $_GET["artist"];
-$word = "You";
-$artistName = "Drake";
+
 
 if(strlen($word) == 0|| strlen($artistName) == 0){
     echo null;
