@@ -8,7 +8,6 @@
  */
 
 include "DatabaseAccesor.php";
-include  "Constants.php";
 
 // This class gets a list of suggested artist names that start with the inputted string
 class ArtistSuggestions extends DatabaseAccesor
@@ -18,14 +17,15 @@ class ArtistSuggestions extends DatabaseAccesor
      * @return array|null
      */
     public function getSuggestion($partialName){
-        $songsStatement = $this->conn->prepare("SELECT * FROM Artist WHERE ArtistName LIKE ?%");
-        $songsStatement->bind_param("s", $partialName);
-        $songsStatement->execute();
-        $result = $songsStatement->get_result();
+        $artistStatement = $this->conn->prepare("SELECT * FROM Artist WHERE ArtistName LIKE ?");
+        $prefix = $partialName."%";
+        $artistStatement->bind_param("s", $prefix);
+        $artistStatement->execute();
+        $result = $artistStatement->get_result();
         if ($result->num_rows > 0) {
             $i = 0;
             $suggestions = array();
-            while($row = $result->fetch_assoc() && $i < 5) {
+            while(($row = $result->fetch_assoc()) && ($i < 5)) {
                 $artistName = $row["ArtistName"];
                 $artistImage = $row["ImageURL"];
                 $suggestions[$artistName] = $artistImage;
@@ -33,11 +33,7 @@ class ArtistSuggestions extends DatabaseAccesor
             }
             return $suggestions;
         }
-        echo $suggestions;
         return null;
     }
 
 }
-
-$suggest = new ArtistSuggestions();
-$suggest->getSuggestion("Kan");
