@@ -1540,8 +1540,13 @@ function populateWordCloud(){ //void
 	//TODO use model data
 
 	var data = getWordCloudData(currentArtistList);
-  var width = wCCanvas.clientWidth;
-  if(document.getElementById('blackAndWhite').checked) { 
+  var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              alert(this.responseText);
+              words1 = JSON.parse(this.responseText);
+              var width = wCCanvas.clientWidth;
+               if(document.getElementById('blackAndWhite').checked) { 
     d3.wordcloud()
         .size([width, 500])
         .selector("#wCCanvas")
@@ -1560,7 +1565,13 @@ function populateWordCloud(){ //void
   }
 
   d3.select("#wCCanvas").selectAll("text").on("click", function(d, i) { wordClickAction(d3.select(this).text()); });
-}
+
+            }
+        };
+        xmlhttp.open("GET", " http://localhost/cumulyrics/backend/getWordCloud.php?artist=drake", true);
+        xmlhttp.send();
+ 
+ }
 
 
 function clearWordCloud(){ //void
