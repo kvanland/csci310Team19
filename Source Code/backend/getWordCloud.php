@@ -6,8 +6,10 @@
  * Time: 6:17 PM
  */
 include "WordCloud.php";
-//$artists = $_GET["artists"];
-$artists = array("Drake", "Coldplay");
+//$artistsCSV =  "Drake,Coldplay"; *EXAMPLE*
+$artistsCSV = $_GET["artists"];
+$artists = str_getcsv($artistsCSV);
+
 if ($artists == null){
     echo null;
     exit(1);
