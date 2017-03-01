@@ -10,8 +10,6 @@ include "ArtistSuggestions.php";
 
 $partialName = $_GET["artist"];
 
-$partialName = "xvf";
-
 if(strlen($partialName) == 0){
     echo null;
     exit(1);
@@ -22,7 +20,7 @@ $artistNames = $suggestions->getSuggestion($partialName);
 $sendObj = array();
 
 
-if(!empty($suggestions)){
+if(empty($artistNames)){
     echo null;
 }
 
