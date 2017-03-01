@@ -25,7 +25,8 @@ class SongsFinder extends DatabaseAccesor
                 $songsFrequencyAssociativeArray = array();
                 for ($i = 0; $i < count($songsFrequencyArray); $i ++) {
                     $singleSong = explode("*$*", $songsFrequencyArray[$i]);
-                    $songsFrequencyAssociativeArray[$singleSong[0]] = $singleSong[1];
+                    $artistFrequencyArray = array($singleSong[1], $artistName);
+                    $songsFrequencyAssociativeArray[$singleSong[0]] = $artistFrequencyArray;
                 }
                 arsort($songsFrequencyAssociativeArray);
                 $songsStatement->close();
