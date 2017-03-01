@@ -7,8 +7,7 @@
  */
 include "WordCloud.php";
 //$artistsCSV =  "Drake,Coldplay,Rihanna,Kendrick Lamar,Radiohead"; *EXAMPLE*
-//$artistsCSV = $_GET["artists"];
-$artistsCSV =  "Drake,Coldplay,Rihanna,Kendrick Lamar,Radiohead";
+$artistsCSV = $_GET["artists"];
 $artists = str_getcsv($artistsCSV);
 
 if ($artists == null){
