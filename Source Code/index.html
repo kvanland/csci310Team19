@@ -12,21 +12,6 @@
 
 <body>
 
-  <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
-  
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyACKaQ-DLVWmYxxu9ekzA4LMonRyN1niVQ",
-      authDomain: "cumulyrics.firebaseapp.com",
-      databaseURL: "https://cumulyrics.firebaseio.com",
-      storageBucket: "cumulyrics.appspot.com",
-      messagingSenderId: "163759277958"
-    };
-    firebase.initializeApp(config);
-
-  </script>
-
   <script>
       window.fbAsyncInit = function() {
       FB.init({
@@ -87,7 +72,7 @@
   <div id = "Search">
     <input id = "searchBar" type = "text" list="autoList" onchange= userTypes()></input>
     <br></br>
-    <button id = "searchButton" class = "purpleButton" onclick = searchAction()> Search </button>
+    <button id = "searchButton" disabled = true class = "purpleButton" onclick = searchAction()> Search </button>
     <button id = "shareButton"> Share to Facebook</button>
     <button id = "mergeButton" class = "purpleButton"> Add to Cloud </button>
   </div>
@@ -106,31 +91,18 @@
 
   document.getElementById('shareButton').onclick = function() {
 
-   // Points to the root reference
-   var tempRef = firebase.storage().ref().child('images/upload.jpg');
-
-   var s = new XMLSerializer().serializeToString(document.getElementById("wCCanvas"))
+ 
+   var s = new XMLSerializer().serializeToString(document.getElementById("wCCanvas"));
 
 
-var img = window.btoa(s);
-console.log(img);
+  var img = window.btoa(s);
+  console.log(img);
 
-   // Upload file and metadata to the object 'images/mountains.jpg'
-   var uploadTask = tempRef.putString(img, 'base64');
-
- uploadTask.on('state_changed', function(snapshot) { },
-   function(error) {
-     // Handle unsuccessful uploads
-   }, function() {
-     // Handle successful uploads on complete
-     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-     var downloadURL = uploadTask.snapshot.downloadURL;
      FB.ui({
        method: 'share',
-       href: downloadURL,
+       href: 'https://static.pexels.com/photos/39517/rose-flower-blossom-bloom-39517.jpeg',
        caption: 'test photo upload',
      }, function(response){});
-   });
 }
 
 /*
