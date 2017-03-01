@@ -6,17 +6,25 @@
  * Time: 5:25 PM
  */
 
+include "LyricFinder.php";
+
 $song = $_GET["song"];
 $artistName = $_GET["artist"];
 
-if(strlen($song = 0)|| strlen($artistName = 0)){
+
+$song = str_replace(' ', '', $song);
+$artistName = str_replace(' ', '', $artistName);
+$song = strtolower($song);
+$artistName = strtolower($artistName);
+
+
+if(strlen($song) == 0 || strlen($artistName) == 0){
     echo null;
     exit(1);
 }
 
 $lyricsFinder = new LyricFinder();
-$lyrics = $lyricsFinder->getLyrics($song, $artistName);
+$lyrics = $lyricsFinder->getLyrics($artistName, $song);
 $sendObj = array("lyrics"=> $lyrics);
-
 
 echo json_encode($sendObj);
