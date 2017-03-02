@@ -88,7 +88,7 @@ function requestLyrics(songTitle, artist){ //String
 	 	url: search,
 	 	success: function (result) {
 	 		alert(result);
-	 		r = JSON.parse(result);
+	 		r = result;
 	 		r = r["lyric"];
 	 		r = r.replace(new RegExp("\n", "g"), ' <br>');
 
