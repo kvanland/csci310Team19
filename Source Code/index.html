@@ -125,7 +125,7 @@ canvg(canvas, svg);
   console.log(document.getElementById("hiddenPng").getAttribute("href"));
   document.getElementById("pngCanvas").src = theImage;
  var dataURL = canvas.toDataURL('image/jpeg', 1.0)
- var encodedPng = dataURL.substring(c.indexOf(',')+1,c.length);
+ var encodedPng = dataURL.substring(dataURL.indexOf(',')+1,dataURL.length);
  var decodedPng = Base64Binary.decode(encodedPng);
 
  PostImageToFacebook( accessToken, 'img.png', 'image/png', decodedPng, 'js upload' );
