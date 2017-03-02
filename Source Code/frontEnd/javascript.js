@@ -76,8 +76,11 @@ function requestAutoCompleteList(search){ //JSON object array
 
 }
 
+var l = require("lyric-get");
+
 function requestLyrics(songTitle, artist){ //String
 	//songTitle: string, artist: string
+	/*
 	var r;
 	var search = "http://localhost/backend/getLyrics.php?artist=" + artist + "&song=" + songTitle;
 	 $.ajax({
@@ -87,7 +90,18 @@ function requestLyrics(songTitle, artist){ //String
 	 	},
 	 	async: false
 	 });
-	 return r;
+	 return r; */
+	 var r;
+	 l.get(artist, songTitle, function(err, res) {
+	 	if(err) {
+	 		console.log(err);
+	 		r = "";
+	 	}
+	 	else {
+	 		console.log(res);
+	 		r = res;
+	  	}
+	 });
 
 }
 
