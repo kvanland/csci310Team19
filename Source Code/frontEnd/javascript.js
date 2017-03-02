@@ -250,6 +250,7 @@ function populateSongList(songData){ //void
 		var table = d3.select('#SongList').append('table');
 		var thead = table.append('thead');
 		var	tbody = table.append('tbody');
+		table.append('caption').text(currentWord);
 		console.log("populate");
 		// append the header row
 		thead.append('tr')
