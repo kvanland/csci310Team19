@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /home/student/local/lyric-api/
+npm start
