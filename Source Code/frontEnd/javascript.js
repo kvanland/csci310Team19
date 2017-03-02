@@ -80,28 +80,21 @@ var l = require("lyric-get");
 
 function requestLyrics(songTitle, artist){ //String
 	//songTitle: string, artist: string
-	/*
+	
 	var r;
-	var search = "http://localhost/backend/getLyrics.php?artist=" + artist + "&song=" + songTitle;
+	var search = "http://localhost:80801/api/find/" + artist + "/" + songTitle;
 	 $.ajax({
 	 	url: search,
 	 	success: function (result) {
-	 		r = result;
+	 		r = JSON.parse(result);
+	 		r = r["lyric"];
+	 		r = r.replace(new RegExp("\n", "g"), ' <br>');
+
 	 	},
 	 	async: false
 	 });
-	 return r; */
-	 var r;
-	 l.get(artist, songTitle, function(err, res) {
-	 	if(err) {
-	 		console.log(err);
-	 		r = "";
-	 	}
-	 	else {
-	 		console.log(res);
-	 		r = res;
-	  	}
-	 });
+	 return r; 
+
 
 }
 
