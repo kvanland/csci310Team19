@@ -10,7 +10,8 @@ class LyricFinder
 {
 
     public function getLyrics($artist, $song){
-        $url = "http://azlyrics.com/lyrics/".$artist."/".$song.".html";
+
+        $url = "http://localhost:8081/find/".$artist."/".$song;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);

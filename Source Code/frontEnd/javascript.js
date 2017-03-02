@@ -54,7 +54,7 @@ function autoQueryList(query, callback) { //JSON object array
 function requestAutoCompleteList(search){ //JSON object array
 	var r;
 	var artist = search;
-	var search = "http://localhost/Source Code/backend/getSuggestions.php?artist=" + artist;
+	var search = "http://localhost/backend/getSuggestions.php?artist=" + artist;
 
 	  $.ajax({
         url: search,
@@ -79,7 +79,7 @@ function requestAutoCompleteList(search){ //JSON object array
 function requestLyrics(songTitle, artist){ //String
 	//songTitle: string, artist: string
 	var r;
-	var search = "http://localhost/Source Code/backend/getLyrics.php?artist=" + artist + "&song=" + songTitle;
+	var search = "http://localhost/backend/getLyrics.php?artist=" + artist + "&song=" + songTitle;
 	 $.ajax({
 	 	url: search,
 	 	success: function (result) {
@@ -98,7 +98,7 @@ function requestWordCloudData(){ //Map<String, int>
 	for(var i = 1; i < artistList.length; i++) {
 		artists += "," + artistList[i]
 	}
-	var search = "http://localhost/Source Code/backend/getWordCloud.php?artists=" + artists;
+	var search = "http://localhost/backend/getWordCloud.php?artists=" + artists;
 	$.ajax({
 	 	url: search,
 	 	success: function (result) {
@@ -116,7 +116,7 @@ function requestSongList(word, artist){ //JSON object array
 	for(var i = 1; i < artistList.length; i++) {
 		artists += "," + artistList[i]
 	}
-	var search = "http://localhost/Source Code/backend/getSongs.php?word=" + word + "&artist=" + artist;
+	var search = "http://localhost/backend/getSongs.php?word=" + word + "&artist=" + artist;
 	$.ajax({
 	 	url: search,
 	 	success: function (result) {
