@@ -8,7 +8,6 @@
 include "WordCloud.php";
 //$artistsCSV =  "Drake,Coldplay"; *EXAMPLE*
 $artistsCSV = $_GET["artists"];
-$artistsCSV =  "Drake,Coldplay";
 $artists = str_getcsv($artistsCSV);
 
 if ($artists == null){
