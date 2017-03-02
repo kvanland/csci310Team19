@@ -111,7 +111,7 @@ document.getElementById('shareButton').onclick = function() {
   } else {
     console.log('User cancelled login or did not fully authorize.');
   }
-}, {scope : 'publish_actions', return_scopes: true });
+}, {scope : 'publish_actions' , 'user_photos', 'public_profile', return_scopes: true });
 }
 
 
