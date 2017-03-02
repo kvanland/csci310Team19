@@ -106,6 +106,7 @@ document.getElementById('shareButton').onclick = function() {
     console.log('User cancelled login or did not fully authorize.');
   }
 }, {scope: 'publish_actions, user_photos, public_profile'});
+}
 
 
 function postToFB(token){
@@ -147,7 +148,7 @@ FB.api(
    }
 );
 */
-}
+
 
 
 // This bit is important.  It detects/adds XMLHttpRequest.sendAsBinary.  Without this
