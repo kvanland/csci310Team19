@@ -87,6 +87,7 @@ function requestLyrics(songTitle, artist){ //String
 	 $.ajax({
 	 	url: search,
 	 	success: function (result) {
+	 		alert(result);
 	 		r = JSON.parse(result);
 	 		r = r["lyric"];
 	 		r = r.replace(new RegExp("\n", "g"), ' <br>');
