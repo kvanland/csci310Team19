@@ -74,6 +74,11 @@
     <button id = "shareButton"> Share to Facebook</button>
     <button id = "mergeButton" onclick = mergeAction() class = "purpleButton"> Add to Cloud </button>
   </div>
+  <div id="hiddenDiv"  >
+ <canvas id="hiddenCanvas"></canvas>
+ <a id="hiddenPng" />
+ <img id="pngCanvas">
+</div
 
   <script src= "frontEnd/lib/d3/d3.js" charset="utf-8"></script>
   <script src= "frontEnd/lib/d3/d3.layout.cloud.js"></script>
@@ -87,82 +92,61 @@
 
   <script>
 
-  document.getElementById('shareButton').onclick = function() {
-
- 
-   var s = new XMLSerializer().serializeToString(document.getElementById("wCCanvas"));
-
-
-  var img = window.btoa(s);
-
-
-  var doctype = '<?xml version="1.0" standalone="no"?>'
-  + '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "https://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
-
-// serialize our SVG XML to a string.
-var source = (new XMLSerializer()).serializeToString(document.getElementById('wCCanvas'));
-
-// create a file blob of our SVG.
-var blob = new Blob([ doctype + source], { type: 'image/svg+xml;charset=utf-8' });
-console.log(blob);
-var url = window.URL.createObjectURL(blob);
-console.log(url);
-// Put the svg into an image tag so that the Canvas element can read it in.
-var img = d3.select('body').append('img')
- .attr('width', 100)
- .attr('height', 100)
- .node();
-
-var url2;
-var c;
-img.onload = function(){
-  // Now that the image has loaded, put the image into a canvas element.
-  var canvas = d3.select('body').append('canvas').node();
-  canvas.width = 100;
-  canvas.height = 100;
-  c = canvas;
-  var ctx = canvas.getContext('2d');
-  ctx.drawImage(img, 0, 0);
-  var canvasUrl = canvas.toDataURL("image/png");
-  var data = canvasUrl;
-  console.log(data);
-  /*
-    try {
-        blob = dataURItoBlob(data);
-    } catch (e) {
-        console.log(e);
-    }
-    console.log("here"); */
-    var encodedPng = data.substring(c.indexOf(',')+1,c.length);
-    var decodedPng = Base64Binary.decode(encodedPng);
-    FB.getLoginStatus(function (response) {
-        console.log(response);
-        if (response.status === "connected") {
-            postImageToFacebook(response.authResponse.accessToken, 'img.png', 'image/png', decodedPng, 'js upload');
-        } else if (response.status === "not_authorized") {
-            FB.login(function (response) {
-                postImageToFacebook(response.authResponse.accessToken, 'img.png', 'image/png', decodedPng, 'js upload');
-            }, {scope: "publish_actions"});
-        } else {
-            FB.login(function (response) {
-               postImageToFacebook(response.authResponse.accessToken, 'img.png', 'image/png', decodedPng, 'js upload');
-            }, {scope: "publish_actions"});
-        }
+document.getElementById('shareButton').onclick = function() {
+ FB.login(function(response) {
+  if (response.authResponse) {
+    var access_token =   FB.getAuthResponse()['accessToken'];
+    console.log(access_token)
+    token = access_token;
+    postToFB(access_token);
+    FB.api('/me', function(response) {
+    console.log('Good to see you, ' + response.name + '.');
     });
-  url2 = canvasUrl;
-  var img2 = d3.select('body').append('img')
-    .attr('width', 100)
-    .attr('height', 100)
-    .node();
-  // this is now the base64 encoded version of our PNG! you could optionally
-  // redirect the user to download the PNG by sending them to the url with
-  // `window.location.href= canvasUrl`.
-  img2.src = canvasUrl; 
+  } else {
+    console.log('User cancelled login or did not fully authorize.');
+  }
+}, {scope: 'publish_actions, user_photos, public_profile'});
 
+
+function postToFB(token){
+ var svgDiv = $("#wCCanvas");
+var svg = svgDiv[0].outerHTML;
+var canvas = document.getElementById('hiddenCanvas');
+canvg(canvas, svg);
+  var theImage = canvas.toDataURL('image/png');
+  $("#hiddenPng").attr('href', theImage);
+  $("#hiddenPng").click()
+  console.log(document.getElementById("hiddenPng").getAttribute("href"));
+  document.getElementById("pngCanvas").src = theImage;
+ var dataURL = canvas.toDataURL('image/jpeg', 1.0)
+ var encodedPng = dataURL.substring(c.indexOf(',')+1,c.length);
+ var decodedPng = Base64Binary.decode(encodedPng);
+
+ PostImageToFacebook( accessToken, 'img.png', 'image/png', decodedPng, 'js upload' );
 }
-// start loading the image.
-img.src = url;
-  
+/*
+ FB.ui({
+   method: 'feed',
+   link: theImage,
+   caption: 'test photo upload',
+   function(response){}
+   });
+*//*
+FB.api(
+   "/me/photos",
+   "POST",
+   {
+       "source": canvas
+   },
+   function (response) {
+     if (response && !response.error) {
+      alert("POSTED");
+     }else{
+       alert(response.error);
+     }
+   }
+);
+*/
 }
 
 
