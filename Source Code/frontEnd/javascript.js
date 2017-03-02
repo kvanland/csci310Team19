@@ -184,12 +184,10 @@ function showWordCloudPage(){ //void
 	for(var i = 0; i < artistList.length; i++) {
 		artistList += ", " + artistList[i];
 	}
-	document.getElementById("WCTitle").innerText = artists;
    
 }
 
 function hideWordCloudPage(){ //void 
-	document.getElementById("WCTitle").innerText = "";
 	setInvisible("WordCloud");
 	setHeight("wCCanvas", "0");
 }
