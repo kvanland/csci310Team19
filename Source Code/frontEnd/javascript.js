@@ -82,7 +82,7 @@ function requestLyrics(songTitle, artist){ //String
 	//songTitle: string, artist: string
 	
 	var r;
-	var search = "localhost:8081/api/find/" + artist + "/" + songTitle;
+	var search = "http://localhost:8081/api/find/" + artist + "/" + songTitle;
 
 	 $.ajax({
 	 	url: search,
