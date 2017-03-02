@@ -27,15 +27,7 @@ if(strlen($song) == 0 || strlen($artistName) == 0){
 // Create a LyricsFinder and get the Lyrics with an artist and song title
 $lyricsFinder = new LyricFinder();
 $lyrics = $lyricsFinder->getLyrics($artistName, $song);
-<<<<<<< HEAD
 
 
 echo $lyrics;
-=======
 
-// Create the associated array
-$sendObj = array("lyrics"=> $lyrics);
-
-// Turn associated array into JSON and send it to front end
-echo json_encode($sendObj);
->>>>>>> 2fe11d554aa6045d9bd84ae83387cd1b5c4cf040
