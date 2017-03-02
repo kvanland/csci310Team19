@@ -230,7 +230,7 @@ function populateLyrics(lyrics, artist, word){ //void
 	
 	var lyric = String(lyrics);
 	var inner = lyrics.replace(new RegExp(" " +word + " ", "g"), '<span style="color:yellow"> ' + word + '</span>');
-	inner = lyrics.replace(new RegExp(" " +word + ",", "g"), '<span style="color:yellow"> ' + word + ',</span>');
+	inner = inner.replace(new RegExp(" " +word + ",", "g"), '<span style="color:yellow"> ' + word + ',</span>');
 	inner = currentSong + "<br> <br>" + inner;
      var theDiv = document.getElementById("Lyrics");
 	theDiv.innerHTML = inner; 
