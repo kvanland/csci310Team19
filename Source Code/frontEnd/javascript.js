@@ -76,7 +76,7 @@ function requestAutoCompleteList(search){ //JSON object array
 
 }
 
-var l = require("lyric-get");
+
 
 function requestLyrics(songTitle, artist){ //String
 	//songTitle: string, artist: string
