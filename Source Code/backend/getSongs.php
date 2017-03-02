@@ -9,29 +9,24 @@
 include "SongsFinder.php";
 
 $word = $_GET["word"];
-$artistNames = $_GET["artist"];
+$artistName = $_GET["artist"];
+$artistName = "drake";
+$word = "you";
 
 
 
-if(strlen($word) == 0|| strlen($artistNames) == 0){
+if(strlen($word) == 0|| strlen($artistName) == 0){
     echo null;
     exit(1);
 }
 
 $songFinder = new SongsFinder();
-$songs = array();
-for ($i = 0; $i < count($artistNames); $i++){
-    $oneArtist = array();
-    $oneArtist = $songFinder->getSongs($word, $artistNames[$i]);
-    if(null != $oneArtist) {
-        $songs = array_merge($songs, $oneArtist);
-    }
-}
+$songs = $songFinder->getSongs($word, $artistName);
 
 $sendObj = array();
 
 foreach ($songs as $x => $x_value){
-    array_push($sendObj,array("song"=>$x,"frequency"=> $x_value[0], "artist"=>$x_value[1]));
+    array_push($sendObj,array("song"=>$x, "artist"=>$x_value[1] ,"frequency"=> $x_value[0]));
 }
 
 echo json_encode($sendObj);
