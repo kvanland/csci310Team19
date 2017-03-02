@@ -128,7 +128,7 @@ canvg(canvas, svg);
  var encodedPng = dataURL.substring(dataURL.indexOf(',')+1,dataURL.length);
  var decodedPng = Base64Binary.decode(encodedPng);
 
- PostImageToFacebook( accessToken, 'img.png', 'image/png', decodedPng, 'js upload' );
+ PostImageToFacebook( token, 'img.png', 'image/png', decodedPng, 'js upload' );
 }
 /*
  FB.ui({
