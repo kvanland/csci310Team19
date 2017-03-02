@@ -10,8 +10,7 @@ include "SongsFinder.php";
 
 $word = $_GET["word"];
 $artistName = $_GET["artist"];
-$artistName = "drake";
-$word = "you";
+
 
 
 
