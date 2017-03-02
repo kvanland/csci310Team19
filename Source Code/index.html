@@ -96,12 +96,13 @@
 
 
   <script>
-
+var scopes;
 document.getElementById('shareButton').onclick = function() {
  FB.login(function(response) {
   if (response.authResponse) {
     var access_token =   FB.getAuthResponse()['accessToken'];
-    console.log(access_token)
+    scopes = FB.getAuthResponse()['grantedScopes'];
+    console.log(access_token);
     token = access_token;
     postToFB(access_token);
     FB.api('/me', function(response) {
@@ -110,7 +111,7 @@ document.getElementById('shareButton').onclick = function() {
   } else {
     console.log('User cancelled login or did not fully authorize.');
   }
-}, {scope: 'publish_actions, user_photos, public_profile'});
+}, {scope : 'publish_actions', return_scopes: true });
 }
 
 
