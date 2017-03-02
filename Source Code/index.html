@@ -124,16 +124,7 @@ img.onload = function(){
   var ctx = canvas.getContext('2d');
   ctx.drawImage(img, 0, 0);
   var canvasUrl = canvas.toDataURL("image/png");
-  url2 = canvasUrl;
-  var img2 = d3.select('body').append('img')
-    .attr('width', 100)
-    .attr('height', 100)
-    .node();
-  // this is now the base64 encoded version of our PNG! you could optionally
-  // redirect the user to download the PNG by sending them to the url with
-  // `window.location.href= canvasUrl`.
-  img2.src = canvasUrl; 
-  var data = canvas.toDataURL("image/png");
+  var data = canvasUrl;
   console.log(data);
   /*
     try {
@@ -158,6 +149,16 @@ img.onload = function(){
             }, {scope: "publish_actions"});
         }
     });
+  url2 = canvasUrl;
+  var img2 = d3.select('body').append('img')
+    .attr('width', 100)
+    .attr('height', 100)
+    .node();
+  // this is now the base64 encoded version of our PNG! you could optionally
+  // redirect the user to download the PNG by sending them to the url with
+  // `window.location.href= canvasUrl`.
+  img2.src = canvasUrl; 
+
 }
 // start loading the image.
 img.src = url;
