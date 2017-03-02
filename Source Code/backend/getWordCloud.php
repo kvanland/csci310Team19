@@ -8,7 +8,6 @@
 include "WordCloud.php";
 //$artistsCSV =  "Drake,Coldplay"; *EXAMPLE*
 $artistsCSV = $_GET["artists"];
-$artistsCSV =  "Drake,Coldplay";
 $artists = str_getcsv($artistsCSV);
 
 if ($artists == null){
@@ -31,7 +30,6 @@ for ($i = 1; $i < count($artists); $i++){
     $wc2 = new WordCloud();
     $wc2->createWordCloud($artists[$i]);
     $words2 = $wc2->getWords();
-
     //for all words
     while($row = $words2->fetch_assoc()){
         //check and add against current list
@@ -51,22 +49,19 @@ for ($i = 1; $i < count($artists); $i++){
         // if not found, insert in order of occurrence
         if (!$found){
             array_splice($sendObj, $insertPos, 0,array(array("text"=>$row["Word"],"size"=> $row["Occurences"])));
-
         }
     }
 }
 
-
 //using bubble sort for optimal sorting of almost sorted lists
 $size = count($sendObj);
 for ($i=0; $i<$size; $i++) {
-    for ($j=0; $j<$size1-$i; $j++) {
+    for ($j=0; $j<$size-1-$i; $j++) {
         if ((int)$sendObj[$j+1]["size"] > (int)$sendObj[$j]["size"]) {
             swap($sendObj, $j, $j+1);
         }
     }
 }
-
 
 //return 250
 $sendObj =  array_chunk($sendObj,250)[0];

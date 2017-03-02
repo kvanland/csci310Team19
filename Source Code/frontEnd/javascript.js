@@ -52,21 +52,21 @@ function autoQueryList(query, callback) { //JSON object array
 ***************************************************************/
 
 function requestAutoCompleteList(search){ //JSON object array
-	var bar;
+	var r;
 	var artist = search;
 	var search = "http://localhost/Source Code/backend/getSuggestions.php?artist=" + artist;
-
 
 	  $.ajax({
         url: search,
         success: function (result) {
-            bar = JSON.parse(result);
+ 
+            r = JSON.parse(result);
         },
         async: false
     });
 
 
-  return bar;
+  return r;
 	/*
 		 TODO
 		use AJAX to request autocompleteList raw data
@@ -78,36 +78,54 @@ function requestAutoCompleteList(search){ //JSON object array
 
 function requestLyrics(songTitle, artist){ //String
 	//songTitle: string, artist: string
+	var r;
 	var search = "http://localhost/Source Code/backend/getLyrics.php?artist=" + artist + "&song=" + songTitle;
-	 $.get(search, function(data, status){
+	 $.ajax({
+	 	url: search,
+	 	success: function (result) {
+	 		r = result;
+	 	},
+	 	async: false
+	 });
+	 return r;
 
-    });
 }
 
-function requestWordCloudData(artistList){ //Map<String, int>
+function requestWordCloudData(){ //Map<String, int>
 	//artistList: JSON object array
-	var artist = document.getElementById("searchBar").value;
-	var search = "http://localhost/Source Code/backend/getWordCloud.php?artist=" + artist;
 
-	 $.get(search, function(data, status){
-         wordCloudData = JSON.parse(data);
-
-         populateWordCloud();
-
-    });
+	var artists = artistList[0];
+	for(var i = 1; i < artistList.length; i++) {
+		artists += "," + artistList[i]
+	}
+	var search = "http://localhost/Source Code/backend/getWordCloud.php?artists=" + artists;
+	$.ajax({
+	 	url: search,
+	 	success: function (result) {
+	 		r = JSON.parse(result);
+	 	},
+	 	async : false
+	 });
+	 return r;
 	
 }
 
 function requestSongList(word, artist){ //JSON object array
-	//word: string, artistList: JSON onject array
-	/*
-	var search = "http://localhost/cumulyrics/backend/getSongs.php?word=" + word + "&artist=" + "drake";
-	alert(search);
-	 $.get(search, function(data, status){
-         alert(data);
+	var r;
+	var artists = artistList[0];
+	for(var i = 1; i < artistList.length; i++) {
+		artists += "," + artistList[i]
+	}
+	var search = "http://localhost/Source Code/backend/getSongs.php?word=" + word + "&artist=" + artist;
+	$.ajax({
+	 	url: search,
+	 	success: function (result) {
+	 		r = JSON.parse(result);
+	 	},
+	 	async : false
+	 });
+	 return r;
 
-    });
-	*/
 }
 
 /***************************************************************
@@ -115,14 +133,14 @@ function requestSongList(word, artist){ //JSON object array
 ***************************************************************/
 var currentWord; //String
 var currentSong; //JSON object
-var currentArtistList; //JSON object array
+var artistList = new Array(); //JSON object array
 
 function clearArtistList(){ //void 
 	artistList = new Array();
 }
 
 function addToArtistList(artist){ //void 
-	//artist: JSON object
+	//artist: string
 	artistList.push(artist);
 }
 
@@ -163,26 +181,22 @@ function hideWordCloudPage(){ //void
 function showLyricPage(){ //void
 	setPage(3);
 	setVisible("Lyrics");
-	setHeight("lyricsCanvas", "60vh");
 }
 
 function hideLyricPage(){ //void
 	setInvisible("Lyrics");
-	d3.select("#lyricsCanvas").selectAll("*").remove();
-	setHeight("lyricsCanvas", "0");
+	document.getElementById("Lyrics").innerHTML = "";
 }
 
 function showSongListPage(){ //void
 	setPage(2);
 	setVisible("SongList");
-	setHeight("songListCanvas", "60vh");
 	populateSongList(getSongList());
 }
 
 function hideSongListPage(){ //void
 	setInvisible("SongList");
-	d3.select("#songListCanvas").selectAll("*").remove();
-	setHeight("songListCanvas", "0");
+	clearSongList();
 }
 
 /***************************************************************
@@ -198,10 +212,12 @@ function populateLyrics(lyrics, artist, word){ //void
 		format page
 	*/
 
-	var lyric = " SMAMLKDSGjlag dahafadhfdah gahfd"
-	d3.select("#lyricsCanvas")
-		.append("text")
-		.text(lyric);
+	
+	var lyric = String(lyrics);
+	var inner = lyrics.replace(new RegExp(word, "g"), '<span style="color:yellow">' + word + '</span>');
+     alert(lyric);
+     var theDiv = document.getElementById("Lyrics");
+	theDiv.innerHTML = inner; 
 }
 
 function clearLyrics(){ //void
@@ -211,69 +227,65 @@ function clearLyrics(){ //void
 /***************************************************************
                       Song List
 ***************************************************************/
-var songListCanvas = document.getElementById("songListCanvas");
 
 function populateSongList(songData){ //void
 	clearSongList();
-	var nameArray = new Array();
-	var artistArray = new Array();
-	var countArray = new Array();
-	var songArray = new Array();
+	
+		var columns = ['Song', 'Artist', 'Frequency'];
+		var table = d3.select('#SongList').append('table');
+		var thead = table.append('thead');
+		var	tbody = table.append('tbody');
+		console.log("populate");
+		// append the header row
+		thead.append('tr')
+	  		.selectAll('th')
+	  		.data(columns).enter()
+	  		.append('th')
+	    	.text(function (column) { return column; });
 
-	for (var i = 0; i < songData.length; i++) {
-    	nameArray.push(songData[i].songName);
-    	artistArray.push(songData[i].artist);
-    	countArray.push(songData[i].wordCount);
-    	songArray.push(songData[i].songName);
-    	songArray.push(songData[i].artist);
-    	songArray.push(songData[i].wordCount);
+		// create a row for each object in the data
+		var rows = tbody.selectAll('tr')
+	 	 	.data(songData)
+	  		.enter()
+	  		.append('tr');
 
-	}
-	d3.select("#songListCanvas").selectAll("text")
-		.data(songArray)
-		.enter()
-		.append("text")
-		.text(function (d, i) {
-			return d;
-		})
-		.attr("x", function(d, i) {
-			var x;
-			if(i % 3 == 0){ //must be songName
-				x = 20;
-			}
-			else if(i % 3 == 1) { // must be artist
-				x = 120;
-			}
-			else {
-				x = 200;
-			}
-			return x;
-		})
-		.attr("y", function(d, i) {
-			return 50*Math.floor(i/3) + 20;
-		})
-		.on("click", function(d, i) {
-			var songIndex = Math.floor(i/3);
-			setCurrentSong(songData[songIndex]);
-			songClickAction(songData[songIndex].songName, songData[songIndex].artist);
-		})
+
+	  	rows.on("click", function (d, i) {
+	  		songClickAction(songList[i]["Song"], songList[i]["Artist"]);
+	  	})
+		// create a cell in each row for each column
+		var cells = rows.selectAll('td')
+	  		.data(function (row) {
+	    		return columns.map(function (column) {
+	      			return {column: column, value: row[column]};
+	    		});
+	 		 })
+	  		.enter()
+	  		.append('td')
+	    	.text(function (d) { return d.value; });
 
 
 }
 
 function clearSongList(){ //void
-	d3.select("#songListCanvas").selectAll("*").remove();
+	d3.select("#SongList").selectAll("*").remove();
 }
 
 function songClickAction(name, artist){ //void
 	// Function requests song lyrics, then displays the lyrics
 	var lyricData = requestLyrics(name, artist);
+	alert(lyricData);
 	setLyrics(lyricData);
-	populateLyrics(getLyrics(), artist, currentWord);
+	populateLyrics(lyricData, artist, currentWord);
+	highlightCurrentWord();
 	hideSearch();
 	hideSongListPage();
 	showLyricPage();
 	setPage(3);
+}
+
+function highlightCurrentWord() {
+	// TODO
 }
 
 /***************************************************************
@@ -323,6 +335,7 @@ function backAction(){
 		setPage(0);
 		clearView();
 		searchButton.disabled = true;
+		shiftInputsCenter();
 		searchBar.value = "";
 		
 	}else if(PAGE[2]){ 
@@ -397,14 +410,17 @@ function wordClickAction(word){ //void
 		use model data
 	*/
 
-	setCurrentWord(word)
-	var sList = requestSongList(currentWord, currentArtistList);
-	var song = '[{ \"songName\" : \"Song 1\", \"artist\" : \"Artist 1\",\"wordCount\" : 23},{\"songName\" : \"Song 2\",\"artist\" : \"Artist 2\",\"wordCount\" : 267},{\"songName\" : \"Song 3\",\"artist\" : \"Artist 2\",\"wordCount\" : 64}]';
-	var songData = JSON.parse(song);
-	songData.sort(function(a, b) {
-    	return parseFloat(b.wordCount) - parseFloat(a.wordCount);
+	setCurrentWord(word);
+	var songList = requestSongList(currentWord, artistList[0]);
+	for(var i = 1; i < artistList.length; i++) {
+
+		songList = songList.concat(requestSongList(currentWord, artistList[i]))
+
+	}
+	setSongList(songList);
+	songList.sort(function(a, b) {
+    	return parseFloat(b.Frequency) - parseFloat(a.Frequency);
 	});
-	setSongList(songData);
 	hideWordCloudPage();
 	hideSearch();
 	showSongListPage();
@@ -465,7 +481,7 @@ function userTypes() {
 	*/
 	searchButton.disabled = true;
   var searchString = d3.select("#searchBar").value;
-  setAutoCompleteList(requestSongList(searchString));
+
 }
 
 function showAutoComplete(search){ //void
@@ -487,7 +503,10 @@ function searchAction(){ //void
 	shiftInputsDown();
 	setVisible("back");
 	setPage(1);
-	requestWordCloudData();
+	clearArtistList();
+	addToArtistList(searchBar.value);
+	wordCloudData = requestWordCloudData();
+	populateWordCloud();
 	showWordCloudPage();
 
 }
@@ -497,6 +516,14 @@ function shareAction(){ //void
 }
 
 function mergeAction(){ //void
+
+	shiftInputsDown();
+	setVisible("back");
+	setPage(1);
+	addToArtistList(searchBar.value);
+	wordCloudData = requestWordCloudData();
+	populateWordCloud();
+	showWordCloudPage();
 	/*
 		TODO
 		add selected artist to artistList
@@ -523,8 +550,6 @@ function shiftInputsDown(){ //void
 
 function shiftInputsCenter(){ //void
 	setHeight("wCCanvas", "1");
-	setHeight("songListCanvas", "1");
-	setHeight("lyricsCanvas", "1");
 	searchContainer.style.paddingTop = "10%";
 }
 

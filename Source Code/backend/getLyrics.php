@@ -25,6 +25,6 @@ if(strlen($song) == 0 || strlen($artistName) == 0){
 
 $lyricsFinder = new LyricFinder();
 $lyrics = $lyricsFinder->getLyrics($artistName, $song);
-$sendObj = array("lyrics"=> $lyrics);
 
-echo json_encode($sendObj);
+
+echo $lyrics;

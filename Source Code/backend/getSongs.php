@@ -25,7 +25,7 @@ $songs = $songFinder->getSongs($word, $artistName);
 $sendObj = array();
 
 foreach ($songs as $x => $x_value){
-    array_push($sendObj,array("song"=>$x, "artist"=>$x_value[1] ,"frequency"=> $x_value[0]));
+    array_push($sendObj,array("Song"=>$x, "Artist"=>$x_value[1] ,"Frequency"=> $x_value[0]));
 }
 
 echo json_encode($sendObj);

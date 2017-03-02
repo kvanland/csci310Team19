@@ -5,6 +5,10 @@ body{
 	font-family: 'Raleway', sans-serif;
 }
 
+td{
+	padding:0 40px 0;
+}
+
 #titlebar{ /*background of the title bar*/
 	position: fixed;
     top:0;
