@@ -179,16 +179,17 @@ function showWordCloudPage(){ //void
 	setPage(1);
 	setVisible("WordCloud");
 	setHeight("wCCanvas", "500px");
-	/*
+	
 	var artists = artistList[0];
 	for(var i = 0; i < artistList.length; i++) {
 		artistList += ", " + artistList[i];
 	}
-	document.getElementById("change").innerHTML = "<button id = \"back\" onclick = backAction()> Back </button> " + artists + "<button id = \"home\" onclick = homeAction()> <i class=material-icons \"md-48\">home</i> </button> ";
-   */
+	document.getElementById("WCTitle").innerHTML = artists;
+   
 }
 
 function hideWordCloudPage(){ //void 
+	document.getElementById("WCTitle").innerHTML = "";
 	setInvisible("WordCloud");
 	setHeight("wCCanvas", "0");
 }
