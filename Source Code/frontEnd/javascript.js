@@ -230,7 +230,7 @@ function populateLyrics(lyrics, artist, word){ //void
 	
 	var lyric = String(lyrics);
 	var inner = lyrics.replace(new RegExp(" " +word, "g"), '<span style="color:yellow"> ' + word + '</span>');
-
+	inner = currentSong + "<br> <br>" + inner;
      var theDiv = document.getElementById("Lyrics");
 	theDiv.innerHTML = inner; 
 }
@@ -290,6 +290,7 @@ function clearSongList(){ //void
 function songClickAction(name, artist){ //void
 	// Function requests song lyrics, then displays the lyrics
 	var lyricData = requestLyrics(name, artist);
+	setCurrentSong(name);
 	setLyrics(lyricData);
 	populateLyrics(lyricData, artist, currentWord);
 	hideSearch();
