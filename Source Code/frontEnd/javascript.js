@@ -522,6 +522,8 @@ function mergeAction(){ //void
 	shiftInputsDown();
 	setVisible("back");
 	setPage(1);
+	if($.inArray(searchBar.value, artistList) > -1)
+		return;
 	addToArtistList(searchBar.value);
 	wordCloudData = requestWordCloudData();
 	populateWordCloud();
