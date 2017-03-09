@@ -179,11 +179,6 @@ function showWordCloudPage(){ //void
 	setPage(1);
 	setVisible("WordCloud");
 	setHeight("wCCanvas", "500px");
-	
-	var artists = artistList[0];
-	for(var i = 0; i < artistList.length; i++) {
-		artistList += ", " + artistList[i];
-	}
    
 }
 
