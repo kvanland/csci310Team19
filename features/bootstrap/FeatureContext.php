@@ -42,7 +42,7 @@ class FeatureContext extends MinkContext
     {
         /* get to word cloud page */
         $session = $this->getSession();
-        //$session->visit("http://localhost");
+        $session->visit("http://localhost");
         $page = $session->getPage();
         $tokens = explode(' ', $arg1);
         $search_query = $tokens[0];
