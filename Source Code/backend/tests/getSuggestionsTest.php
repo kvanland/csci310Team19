@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 final class getSuggestionsTest extends TestCase
 {
-    public function testReturnsValidJson()
+    public function testReturnsValidJsonIfThereIsASuggestion()
     {
         json_decode(SuggestionsDriver::getSuggestions("dra"));
         $this->assertEquals(JSON_ERROR_NONE, json_last_error());
