@@ -9,19 +9,15 @@ include "WordCloud.php";
 // $artistsCSV =  "Drake,Coldplay,Rihanna,Kendrick Lamar,Radiohead";
 $artistsCSV = $_GET["artists"];
 
-
-
 echo WordCloudDriver::getWordCloud($artistsCSV);
 
 class WordCloudDriver
 {
     public static function getWordCloud($artistsStr){
-        $artists = str_getcsv($artistsStr);
-
-        if ($artists == null){
-            echo null;
-            exit(1);
+        if ($artistsStr == ""){
+            return null;
         }
+        $artists = str_getcsv($artistsStr);
 
         $wordToCountHM = array();
         //for all the artists

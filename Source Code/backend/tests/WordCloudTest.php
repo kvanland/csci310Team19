@@ -36,7 +36,6 @@ final class WordCloudTest extends TestCase
         $words = $wc->getWords();
 
         $isDesc = true;
-        $last = $words->fetch_assoc()["Occurences"];
         while ($row = $words->fetch_assoc()) {
             if ($row["Occurences"]> $last) {
                 $isDesc = false;

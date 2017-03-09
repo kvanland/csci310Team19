@@ -12,4 +12,8 @@ final class SongFinderTest extends TestCase
 
     }
 
+    public function testCorrectResultForArtist(){
+    	
+    }
+
 }
