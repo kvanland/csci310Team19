@@ -49,10 +49,16 @@ class FeatureContext extends MinkContext
         for ($i = 1; $i < count($tokens) - 2; $i++) {
             $search_query = $search_query . ' ' . $tokens[$i];
         }
-        $searchbar = $page->find('named', array('id', 'searchBar')); 
-        $searchbar->setValue($search_query);
+	$page->fillField('searchBar', $search_query);
+/*
+        $searchbar = $page->findField('searchBar'); 
+        $searchbar->fillField($search_query);
+*/
+	$page->clickButton('mergeButton');
+/*
         $wordcloudButton = $page->find('named', array('id', 'mergeButton'));
         $wordcloudButton->click();
+*/
     }
 
     /**
