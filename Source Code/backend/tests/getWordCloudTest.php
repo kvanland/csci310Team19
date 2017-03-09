@@ -43,9 +43,18 @@ final class GetWordCloudTest extends TestCase
     public function testCombinedArtistProvideAccurateSummation(){
     	$wordsJSON = WordCloudDriver::getWordCloud("Drake,Coldplay");
     	$words = json_decode($wordsJSON,True);
-    	for ($i=0; $i < ; $i++) { 
-    		$words[$i];
+    	$verifyYou = false;
+    	$verifyWould = false;
+    	for ($i=0; $i < count($words); $i++) { 
+    		if ($words[$i]["text"] == "you" && $words[$i]["size"] == "70") {
+    			$verifyYou = true;
+    		}
+    		if ($words[$i]["text"] == "would" && $words[$i]["size"] == "8") {
+    			$verifyWould = true;
+    		}
     	}
+    	$verify = $verifyYou && $verifyWould;
+    	$this->assertEquals(true, $verify);
     }
 
 
