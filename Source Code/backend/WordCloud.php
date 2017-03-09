@@ -31,12 +31,4 @@ class WordCloud extends DatabaseAccesor
         return $this->wordCloudData;
     }
 
-    public function getOccurrences(){
-        if (!isset($this->wordCloudData)){
-            return null;
-        }
-        return $this->wordCloudData[1];
-    }
-
-
 }

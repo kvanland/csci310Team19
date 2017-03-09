@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers WordCloud
  */
-final class GetWordCloudTest extends TestCase
+final class SongFinderTest extends TestCase
 {
     public function testNullArray(){
 
