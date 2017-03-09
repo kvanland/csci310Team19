@@ -5,24 +5,19 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 
-<<<<<<< HEAD
 use Behat\Behat\Context\ClosuredContextInterface;
 use Behat\Behat\Context\TranslatedContextInterface;
 
 use Behat\MinkExtension\Context\MinkContext;
 
-=======
-use Behat\MinkExtension\Context\MinkContext;
-use Behat\Behat\Context\ClosuredContextInterface;
-use Behat\Behat\Context\TranslatedContextInterface;
 
->>>>>>> origin/alec-testing
+
 /**
  * Defines application features from the specific context.
  */
 class FeatureContext extends MinkContext
 {
-<<<<<<< HEAD
+
     public $session;
     /**
      * Initializes context.
@@ -408,27 +403,6 @@ class FeatureContext extends MinkContext
         throw new Exception("Not on wordcloud page");
     }
 
-
-=======
-	/**
-	 * Initializes context.
-	 *
-	 * Every scenario gets its own context instance.
-	 * You can also pass arbitrary arguments to the
-	 * context constructor through behat.yml.
-	 */
-	public function __construct()
-	{
-		$driver = new \Behat\Mink\Driver\Selenium2Driver('chrome');
-		$session = new \Behat\Mink\Session($driver);
-		$session->start();
-	}
-
-	public function __destruct()
-	{
-		$this->getSession()->stop();
-	}
-
 	/**
 	 * @Given the current page is :arg1 word cloud
 	 */
@@ -697,5 +671,5 @@ class FeatureContext extends MinkContext
 			throw new Exception("Current page is not facebook post page.");
 		}
 	}
->>>>>>> origin/alec-testing
+
 }
