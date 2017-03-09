@@ -24,7 +24,7 @@ class DatabaseAccesor
     }
 
     // Takes an artist as a parameter and returns its ID in the database
-    protected function getArtistID($artistName){
+    public function getArtistID($artistName){
         // // Create and execute prepared statement on MySQL database
         $artistIdStatement = $this->conn->prepare("SELECT ArtistID FROM Artist WHERE ArtistName =?");
         $artistIdStatement->bind_param("s", $artistName);
