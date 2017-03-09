@@ -221,4 +221,184 @@ class FeatureContext extends MinkContext
             $session->wait(4000);
         }
     }
+
+
+    /**
+     * @Given I am on the home page
+     */
+    public function iAmOnTheHomePage()
+    {
+        $session = $this->getSession();
+        $session->visit("http://localhost");
+    }
+
+    /**
+     * @When I do nothing
+     */
+    public function iDoNothing()
+    {
+        
+    }
+
+    /**
+     * @Then I should not be able to click search
+     */
+    public function iShouldNotBeAbleToClickSearch()
+    {
+        $session = $this->getSession();
+    $page = $session->getPage();
+    $searchButton = $page->findById("searchButton");
+    if(!$searchButton->getAttribute("disabled"))
+        throw new Exception("Search not disabled");
+    }
+
+    /**
+     * @When I type :arg1
+     */
+    public function iType($arg1)
+    {
+    $session = $this->getSession();
+    $page = $session->getPage();
+    $page->findByID("searchBar")->keyPress($arg1);
+        
+    }
+
+    /**
+     * @When I select the suggestion :arg1
+     */
+    public function iSelectTheTopSuggestion($arg1)
+    {
+        $session = $this->getSession();
+    $page = $session->getPage();
+    $page->fillField('searchBar', $arg1);
+    
+
+    }
+
+    /**
+     * @Then I should be able to click search
+     */
+    public function iShouldBeAbleToClickSearch()
+    {
+    $session = $this->getSession();
+    $page = $session->getPage();
+    $searchButton = $page->findById("searchButton");
+    if($searchButton->getAttribute("disabled"))
+        throw new Exception("Search disabled");
+        $session->executeScript('searchAction()');
+    $this->getSession()->wait(2000);
+    }
+
+    /**
+     * @Then the wordcloud should be displayed with title :arg1
+     */
+    public function theWordcloudWithTitle($arg1)
+    {
+        $session = $this->getSession();
+    $page = $session->getPage();
+    $wc = $page->findById("wCCanvas");
+    if($wc->getAttribute("style") != "height: 500px;")
+        throw new Exception("wordcloud not displaying");
+    $title = $page->findById("wCTitle");
+    if(is_null($title)) {
+        throw new Exception("No WC Title");
+    } else {
+        if($title->getText() != $arg1)
+            throw new Exception("Wrong WC Title");
+    }
+
+    }
+
+    /**
+     * @Given I am on the wordcloud page
+     */
+    public function iAmOnTheWordcloudPage()
+    {
+    $session = $this->getSession();
+    $session->visit("http://localhost");
+    $page = $session->getPage();
+
+    $drake = "Drake";
+        $page->fillField('searchBar', $drake);
+    $session->executeScript('mergeAction()');
+    $this->getSession()->wait(2000);
+        
+    }
+
+
+    /**
+     * @Then I should not be able to click add to cloud
+     */
+    public function iShouldNotBeAbleToClickAddToCloud()
+    {
+        $session = $this->getSession();
+    $page = $session->getPage();
+    $mergeButton = $page->findById("mergeButton");
+    if(!$mergeButton->getAttribute("disabled"))
+        throw new Exception("Merge not disabled");
+    }
+
+    /**
+     * @Then I should be able to click add to cloud
+     */
+    public function iShouldBeAbleToClickAddToCloud()
+    {
+       $session = $this->getSession();
+    $page = $session->getPage();
+    $mergeButton = $page->findById("mergeButton");
+    if($mergeButton->getAttribute("disabled"))
+        throw new Exception("Merge disabled");
+        $mergeButton->click();
+    $this->getSession()->wait(2000);
+    }
+
+
+    /**
+     * @Then the back button should be invisible
+     */
+    public function theBackButtonShouldBeInvisible()
+    {
+        $session = $this->getSession();
+    $page = $session->getPage();
+    $backButton = $page->findById("back");
+    if($backButton->isVisible())
+        throw new Exception("Back button visible");
+    }
+
+    /**
+     * @When I click the back button
+     */
+    public function iClickTheBackButton()
+    {
+         $session = $this->getSession();
+    $page = $session->getPage();
+    $backButton = $page->findById("back");
+    $backButton->click();
+    }
+
+    /**
+     * @Then I should be on the home page
+     */
+    public function iShouldBeOnTheHomePage()
+    {
+        $session = $this->getSession();
+    $page = $session->getPage();
+    $wc = $page->findById("wCCanvas");
+    if($wc->getAttribute("style") != "height: 1px;")
+        throw new Exception("Not on home page");
+    }
+
+    /**
+     * @Then I should be on the wordcloud page
+     */
+    public function iShouldBeOnTheWordcloudPage()
+    {
+        $session = $this->getSession();
+    $page = $session->getPage();
+    $wc = $page->findById("wCCanvas");
+    if($wc->getAttribute("style") != "height: 500px;")
+        throw new Exception("Not on wordcloud page");
+    }
+
+
 }

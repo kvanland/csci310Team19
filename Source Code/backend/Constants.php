@@ -11,7 +11,7 @@ class Constants
     //Constants
     const SERVER_NAME = "127.0.0.1";
     const USERNAME = 'root';
-    const PASSWORD = "9494859948";
+    const PASSWORD = "root";
     const DB_NAME = "CUMULYRICS";
 }
 ?>
