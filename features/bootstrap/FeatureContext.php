@@ -54,7 +54,9 @@ class FeatureContext extends MinkContext
         $searchbar = $page->findField('searchBar'); 
         $searchbar->fillField($search_query);
 */
-	$page->clickButton('mergeButton');
+	$session->executeScript('mergeAction()');	
+
+	//$page->pressButton('mergeButton');
 /*
         $wordcloudButton = $page->find('named', array('id', 'mergeButton'));
         $wordcloudButton->click();
